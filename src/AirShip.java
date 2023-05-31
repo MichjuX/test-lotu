@@ -67,14 +67,14 @@ public class AirShip{
             return;
         }
         Section tempsection = sections.get(i);
-        System.out.println("SEKCJA "+i+"\n");
-        System.out.println(tempsection.toString());;
+        // System.out.println("SEKCJA "+i+"\n");
+        // System.out.println(tempsection.toString());;
         double ratio = ((currentTime - tempsection.startTime) / (double) (tempsection.endTime - tempsection.startTime));
         currentPos.x = (int) (tempsection.x + ratio * tempsection.distanceX) -50;
         currentPos.y = (int) (tempsection.y + ratio * tempsection.distanceY) -50;
 //        currentPos.x = (int) (tempsection.startPoint.x + ratio * tempsection.distanceX);
 //        currentPos.y = (int) (tempsection.startPoint.y + ratio * tempsection.distanceY);
-        System.out.println(currentPos.x + " " + currentPos.y);
+        // System.out.println(currentPos.x + " " + currentPos.y);
     }
     private int RND(int a){
         Random rand = new Random();
