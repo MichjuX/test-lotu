@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Section {
+public class Route {
     public final Point startPoint;
     public int x,y;
     public Point endPoint;
@@ -10,7 +10,7 @@ public class Section {
     public double distanceY;
     public int startTime;
     public int endTime;
-    Section(int startTime, Point startPoint, Point endPoint, int velocity){
+    Route(int startTime, Point startPoint, Point endPoint, int velocity){
         this.endPoint = endPoint;
         this.startPoint = startPoint;
         x = startPoint.x;

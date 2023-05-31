@@ -15,7 +15,7 @@ public class MyFrame extends JFrame {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setJMenuBar(createMenu(frame));
-//        //Wyswietla okno
+//        Wyswietla okno
 //        frame.pack();
 //        frame.setVisible(true);
 
