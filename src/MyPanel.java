@@ -59,8 +59,8 @@ public class MyPanel extends JPanel implements ActionListener {
     int counter=0;
     @Override
     public void actionPerformed(ActionEvent e){
-            airShip.updatePos(counter);
-            counter++;
+//            airShip.updatePos(counter);
+//            counter++;
             repaint();
     }
 //    if(currentTime<=expectedTime) {
