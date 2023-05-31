@@ -48,6 +48,9 @@ public class MyPanel extends JPanel implements ActionListener {
         Graphics2D g2D = (Graphics2D) g;
         g2D.setPaint(new Color(255, 255, 255));
         g2D.drawRect(airShip.currentPos.x, airShip.currentPos.y, 100, 100);
+        for(Section section : airShip.sections){
+            g2D.drawLine(section.startPoint.x, section.startPoint.y, section.endPoint.x, section.endPoint.y);
+        }
 //        g2D.drawLine(600, 600, 600, 500);
 //        g2D.drawLine(600, 500, 700, 500);
 //        g2D.drawLine(700, 500, 700, 100);

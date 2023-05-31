@@ -87,19 +87,6 @@ public class AirShip extends JPanel implements ActionListener{
 //        Random rand = new Random();
 //        return (Math.abs(rand.nextInt()%a))+1;
     }
-    public void paint(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2D = (Graphics2D) g;
-        g2D.setPaint(new Color(255, 255, 255));
-        g2D.drawRect(currentPos.x, currentPos.y, 100, 100);
-        g2D.drawLine(600, 600, 600, 500);
-        g2D.drawLine(600, 500, 700, 500);
-        g2D.drawLine(700, 500, 700, 100);
-        g2D.drawLine(700, 100, 800, 100);
-        g2D.drawLine(800, 100, 800, 500);
-        g2D.drawLine(800, 500, 900, 500);
-        g2D.drawLine(900, 500, 900, 600);
-    }
     int currentTime = 0;
     public void actionPerformed(ActionEvent event){
         if (sections.get(i).endTime <= currentTime) {
@@ -115,8 +102,6 @@ public class AirShip extends JPanel implements ActionListener{
         double ratio = ((currentTime - tempsection.startTime) / (double) (tempsection.endTime - tempsection.startTime));
         currentPos.x = (int) (tempsection.x + ratio * tempsection.distanceX) -50;
         currentPos.y = (int) (tempsection.y + ratio * tempsection.distanceY) -50;
-//        currentPos.x = (int) (tempsection.startPoint.x + ratio * tempsection.distanceX);
-//        currentPos.y = (int) (tempsection.startPoint.y + ratio * tempsection.distanceY);
 //        System.out.println(currentPos.x + " " + currentPos.y);
         currentTime++;
     }
