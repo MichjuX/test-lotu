@@ -1,6 +1,9 @@
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Section {
+public class Section{
     public final Point startPoint;
     public int x,y;
     public Point endPoint;
@@ -15,14 +18,13 @@ public class Section {
         this.startPoint = startPoint;
         x = startPoint.x;
         y = startPoint.y;
-
-
         this.startTime = startTime;
         this.velocity = velocity;
         distanceX = endPoint.x-startPoint.x;
         distanceY = endPoint.y-startPoint.y;
         distance = Math.sqrt(distanceX*distanceX+distanceY*distanceY);
         endTime = (int) (startTime+distance/velocity);
+
     }
 
     // @Override
