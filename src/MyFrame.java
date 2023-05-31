@@ -15,7 +15,7 @@ public class MyFrame extends JFrame {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setJMenuBar(createMenu(frame));
-//        //Wyswietla okno
+//        Wyswietla okno
 //        frame.pack();
 //        frame.setVisible(true);
 
@@ -29,7 +29,7 @@ public class MyFrame extends JFrame {
         JMenuItem menuItem2 = new JMenuItem("nicnaraziex");
         options.add(menuItem1);
         options.add(menuItem2);
-        legenda.addActionListener((ActionEvent e) -> JOptionPane.showMessageDialog(frame, "Leganda:\n" +
+        legenda.addActionListener((ActionEvent e) -> JOptionPane.showMessageDialog(frame, "Legenda:\n" +
                         "* Złote 10-cio katy - drzewa\n" +
                         "* Turkusowe protokaty - budynki\n", "Legenda",
                 JOptionPane.INFORMATION_MESSAGE));
