@@ -2,18 +2,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Random;
 
-public class AirShip extends JPanel implements ActionListener{
+public class AirShip{
     Point startPos = new Point();
     Point currentPos = new Point();
     List<Section> sections = new ArrayList<Section>();
     int endTime;
     int altitude;
     boolean ended;
-    Timer timer = new Timer(10,this);
 
     AirShip(Point startPos, List<Section> sections){
         this.startPos = startPos;
@@ -57,34 +55,9 @@ public class AirShip extends JPanel implements ActionListener{
         }
         this.currentPos = startPos;
 
-        timer.start();
     }
     int i = 0;
     public void updatePos(int currentTime) {
-//        if (sections.get(i).endTime <= currentTime) {
-//            i++;
-//        }
-//
-//        if (i >= sections.size()) {
-//            ended = true;
-//            return;
-//        }
-//        Section tempsection = sections.get(i);
-//        System.out.println("SEKCJA "+i+"\n");
-//        System.out.println(tempsection.toString());;
-//        double ratio = ((currentTime - tempsection.startTime) / (double) (tempsection.endTime - tempsection.startTime));
-//        currentPos.x = (int) (tempsection.x + ratio * tempsection.distanceX) -50;
-//        currentPos.y = (int) (tempsection.y + ratio * tempsection.distanceY) -50;
-////        currentPos.x = (int) (tempsection.startPoint.x + ratio * tempsection.distanceX);
-////        currentPos.y = (int) (tempsection.startPoint.y + ratio * tempsection.distanceY);
-//        System.out.println(currentPos.x + " " + currentPos.y);
-//    }
-//    private int RND(int a){
-//        Random rand = new Random();
-//        return (Math.abs(rand.nextInt()%a))+1;
-    }
-    int currentTime = 0;
-    public void actionPerformed(ActionEvent event){
         if (sections.get(i).endTime <= currentTime) {
             i++;
         }
@@ -102,6 +75,9 @@ public class AirShip extends JPanel implements ActionListener{
 //        currentPos.x = (int) (tempsection.startPoint.x + ratio * tempsection.distanceX);
 //        currentPos.y = (int) (tempsection.startPoint.y + ratio * tempsection.distanceY);
         System.out.println(currentPos.x + " " + currentPos.y);
-        currentTime++;
+    }
+    private int RND(int a){
+        Random rand = new Random();
+        return (Math.abs(rand.nextInt()%a))+1;
     }
 }

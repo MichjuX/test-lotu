@@ -25,18 +25,18 @@ public class Section {
         endTime = (int) (startTime+distance/velocity);
     }
 
-    @Override
-    public String toString() {
-        return "startPoint.x: " + startPoint.x + "\n"
-                + "startPoint.y: "+ startPoint.y + "\n"
-                + "endPoint.x: " + endPoint.x + "\n"
-                + "endPoint.y: " + endPoint.y + "\n"
-                + "velocity: " + velocity + "\n"
-                + "distance: " + distance + "\n"
-                + "distanceX: " + distanceX + "\n"
-                + "distanceY: " + distanceY + "\n"
-                + "startTime:" + startTime + "\n"
-                + "endTime:" + endTime + "\n";
+    // @Override
+    // public String toString() {
+    //     return "startPoint.x: " + startPoint.x + "\n"
+    //             + "startPoint.y: "+ startPoint.y + "\n"
+    //             + "endPoint.x: " + endPoint.x + "\n"
+    //             + "endPoint.y: " + endPoint.y + "\n"
+    //             + "velocity: " + velocity + "\n"
+    //             + "distance: " + distance + "\n"
+    //             + "distanceX: " + distanceX + "\n"
+    //             + "distanceY: " + distanceY + "\n"
+    //             + "startTime:" + startTime + "\n"
+    //             + "endTime:" + endTime + "\n";
 
-    }
+    // }
 }
