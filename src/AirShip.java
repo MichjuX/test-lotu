@@ -1,56 +1,53 @@
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.*;
 import java.util.List;
 
 public class AirShip{
     Point startPos = new Point();
     Point currentPos = new Point();
-    List<Section> sections = new ArrayList<Section>();
+    List<Route> sections = new ArrayList<Route>();
     int endTime;
     int altitude;
     boolean ended;
 
-    AirShip(Point startPos, List<Section> sections){
+    AirShip(Point startPos, List<Route> sections){
         this.startPos = startPos;
         this.sections = sections;
-        for(Section section : sections){
+        for(Route section : sections){
             this.endTime = section.endTime;
         }
         this.currentPos = startPos;
     }
     AirShip(Point startPos){
-//        sections.add(new Section(0,
+//        sections.add(new Route(0,
 //                new Point(RND(1280),RND(720)),
 //                new Point(RND(1280),RND(720)),
 //
 //                ));
 //        for(int i=0; i<3; i++){
-//            sections.add(new Section())
+//            sections.add(new Route())
 //        }
-        sections.add(new Section(0,
+        sections.add(new Route(0,
                 startPos,
                 new Point(600,500),
                 2
                 ));
 
-        sections.add(new Section(sections.get(0).endTime,
+        sections.add(new Route(sections.get(0).endTime,
                 sections.get(0).endPoint,
                 new Point(700,500),
                 2
                 ));
 
-        sections.add(new Section(sections.get(1).endTime, sections.get(1).endPoint, new Point(700,100), 2));
-        sections.add(new Section(sections.get(2).endTime, sections.get(2).endPoint, new Point(800,100), 2));
-        sections.add(new Section(sections.get(3).endTime, sections.get(3).endPoint, new Point(800,500), 2));
-        sections.add(new Section(sections.get(4).endTime, sections.get(4).endPoint, new Point(900,500), 2));
-        sections.add(new Section(sections.get(5).endTime, sections.get(5).endPoint, new Point(900,600), 2));
+        sections.add(new Route(sections.get(1).endTime, sections.get(1).endPoint, new Point(700,100), 2));
+        sections.add(new Route(sections.get(2).endTime, sections.get(2).endPoint, new Point(800,100), 2));
+        sections.add(new Route(sections.get(3).endTime, sections.get(3).endPoint, new Point(800,500), 2));
+        sections.add(new Route(sections.get(4).endTime, sections.get(4).endPoint, new Point(900,500), 2));
+        sections.add(new Route(sections.get(5).endTime, sections.get(5).endPoint, new Point(900,600), 2));
 
 
         this.startPos = startPos;
-        for(Section section : sections){
+        for(Route section : sections){
             this.endTime = section.endTime;
         }
         this.currentPos = startPos;
@@ -66,7 +63,7 @@ public class AirShip{
             ended = true;
             return;
         }
-        Section tempsection = sections.get(i);
+        Route tempsection = sections.get(i);
         // System.out.println("SEKCJA "+i+"\n");
         // System.out.println(tempsection.toString());;
         double ratio = ((currentTime - tempsection.startTime) / (double) (tempsection.endTime - tempsection.startTime));
@@ -76,8 +73,8 @@ public class AirShip{
 //        currentPos.y = (int) (tempsection.startPoint.y + ratio * tempsection.distanceY);
         // System.out.println(currentPos.x + " " + currentPos.y);
     }
-    private int RND(int a){
-        Random rand = new Random();
-        return (Math.abs(rand.nextInt()%a))+1;
-    }
+    // private int RND(int a){
+    //     Random rand = new Random();
+    //     return (Math.abs(rand.nextInt()%a))+1;
+    // }
 }

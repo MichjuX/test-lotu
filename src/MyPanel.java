@@ -2,9 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.rmi.MarshalException;
-import java.sql.SQLOutput;
-import java.util.ArrayList;
 import java.util.Random;
 
 public class MyPanel extends JPanel implements ActionListener {
