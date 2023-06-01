@@ -33,24 +33,24 @@ public class AirShip extends JPanel implements ActionListener{
 //        }
         sections.add(new Section(0,
                 startPos,
-                new Point(600,500),
+                new Point(RND(1280),RND(720)),
                 2
         ));
 
-        sections.add(new Section(sections.get(0).endTime,
-                sections.get(0).endPoint,
-                new Point(700,500),
-                2
-        ));
-        sections.add(new Section(sections.get(1).endTime, sections.get(1).endPoint, new Point(700,100), 2));
-        sections.add(new Section(sections.get(2).endTime, sections.get(2).endPoint, new Point(800,100), 2));
-        sections.add(new Section(sections.get(3).endTime, sections.get(3).endPoint, new Point(800,500), 2));
-        sections.add(new Section(sections.get(4).endTime, sections.get(4).endPoint, new Point(900,500), 2));
-        sections.add(new Section(sections.get(5).endTime, sections.get(5).endPoint, new Point(900,600), 2));
+//        sections.add(new Section(sections.get(0).endTime,
+//                sections.get(0).endPoint,
+//                new Point(700,500),
+//                2
+//        ));
+//        sections.add(new Section(sections.get(1).endTime, sections.get(1).endPoint, new Point(700,100), 2));
+//        sections.add(new Section(sections.get(2).endTime, sections.get(2).endPoint, new Point(800,100), 2));
+//        sections.add(new Section(sections.get(3).endTime, sections.get(3).endPoint, new Point(800,500), 2));
+//        sections.add(new Section(sections.get(4).endTime, sections.get(4).endPoint, new Point(900,500), 2));
+//        sections.add(new Section(sections.get(5).endTime, sections.get(5).endPoint, new Point(900,600), 2));
         for(int i=0; i<5; i++){
             sections.add(new Section(sections.get(i).endTime,
                     sections.get(i).endPoint,
-                    new Point(),
+                    new Point(RND(1280),RND(720)),
                     2
             ));
         }
@@ -83,9 +83,10 @@ public class AirShip extends JPanel implements ActionListener{
 ////        currentPos.y = (int) (tempsection.startPoint.y + ratio * tempsection.distanceY);
 //        System.out.println(currentPos.x + " " + currentPos.y);
 //    }
-//    private int RND(int a){
-//        Random rand = new Random();
-//        return (Math.abs(rand.nextInt()%a))+1;
+    }
+    private int RND(int a){
+        Random rand = new Random();
+        return (Math.abs(rand.nextInt()%a));
     }
     int currentTime = 0;
     public void actionPerformed(ActionEvent event){

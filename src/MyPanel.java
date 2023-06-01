@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class MyPanel extends JPanel implements ActionListener {
-    final int PANEL_WIDTH = 1280;
-    final int PANEL_HEIGHT = 720;
+    public final int PANEL_WIDTH = 1280;
+    public final int PANEL_HEIGHT = 720;
     Image backgroundImage;
     Timer timer;
     Random rand = new Random();
