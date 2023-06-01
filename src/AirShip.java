@@ -34,7 +34,7 @@ public class AirShip extends JPanel implements ActionListener{
         sections.add(new Section(0,
                 startPos,
                 new Point(RND(1280),RND(720)),
-                2
+                5
         ));
 
 //        sections.add(new Section(sections.get(0).endTime,
@@ -47,11 +47,11 @@ public class AirShip extends JPanel implements ActionListener{
 //        sections.add(new Section(sections.get(3).endTime, sections.get(3).endPoint, new Point(800,500), 2));
 //        sections.add(new Section(sections.get(4).endTime, sections.get(4).endPoint, new Point(900,500), 2));
 //        sections.add(new Section(sections.get(5).endTime, sections.get(5).endPoint, new Point(900,600), 2));
-        for(int i=0; i<5; i++){
+        for(int i=0; i<1; i++){
             sections.add(new Section(sections.get(i).endTime,
                     sections.get(i).endPoint,
                     new Point(RND(1280),RND(720)),
-                    2
+                    5
             ));
         }
 
@@ -63,7 +63,6 @@ public class AirShip extends JPanel implements ActionListener{
 
         timer.start();
     }
-    int i = 0;
     public void updatePos(int currentTime) {
 //        if (sections.get(i).endTime <= currentTime) {
 //            i++;
@@ -86,24 +85,34 @@ public class AirShip extends JPanel implements ActionListener{
     }
     private int RND(int a){
         Random rand = new Random();
-        return (Math.abs(rand.nextInt()%a));
+        int x = (Math.abs((rand.nextInt()%a)-100));
+        if(a==1280){
+            System.out.println("x:" + x);
+        }
+        else System.out.println("y:" + x);
+        return x;
     }
     int currentTime = 0;
+    int i = 0;
     public void actionPerformed(ActionEvent event){
-        if (sections.get(i).endTime <= currentTime) {
-            i++;
-        }
+        if(i<sections.size()) {
+            if (sections.get(i).endTime < currentTime) {
+                i++;
+            }
 
-        if (i >= sections.size()) {
-            return;
+            if (i-1 >= sections.size()) {
+                return;
+            }
+            Section tempsection = sections.get(0);
+            tempsection = sections.get(i);
+
+    //        System.out.println("SEKCJA "+i+"\n");
+    //        System.out.println(tempsection.toString());;
+            double ratio = ((currentTime - tempsection.startTime) / (double) (tempsection.endTime - tempsection.startTime));
+            currentPos.x = (int) (tempsection.x + ratio * tempsection.distanceX) -50;
+            currentPos.y = (int) (tempsection.y + ratio * tempsection.distanceY) -50;
+    //        System.out.println(currentPos.x + " " + currentPos.y);
+            currentTime++;
         }
-        Section tempsection = sections.get(i);
-//        System.out.println("SEKCJA "+i+"\n");
-//        System.out.println(tempsection.toString());;
-        double ratio = ((currentTime - tempsection.startTime) / (double) (tempsection.endTime - tempsection.startTime));
-        currentPos.x = (int) (tempsection.x + ratio * tempsection.distanceX) -50;
-        currentPos.y = (int) (tempsection.y + ratio * tempsection.distanceY) -50;
-//        System.out.println(currentPos.x + " " + currentPos.y);
-        currentTime++;
     }
 }
