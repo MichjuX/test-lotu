@@ -15,7 +15,6 @@ public class MyPanel extends JPanel implements ActionListener {
     public final int PANEL_HEIGHT = 720;
     Image backgroundImage;
     Timer timer;
-    Random rand = new Random();
     int Velocity = 2;
     Point startPos = new Point(230, 550);
     Point endPos = new Point(300, 300);
@@ -39,17 +38,11 @@ public class MyPanel extends JPanel implements ActionListener {
     MyPanel() throws Exception {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         this.setBackground(Color.black);
-        //backgroundImage = new ImageIcon("Assets/sktybuc.png").getImage();
         timer = new Timer(delay, this);
         timer.start();
         this.airships = new ArrayList<>();
-//        airships.add(new AirShip(new Point(RND(1280),RND(720))));
-//        airships.add(new AirShip(new Point(RND(1280),RND(720))));
-//        airships.add(new AirShip(new Point(RND(1280),RND(720))));
-//        airships.add(new AirShip(new Point(RND(1280),RND(720))));
     }
 
-    //    AirShip airShip = new AirShip(new Point(600,600));
     private int RND(int a) {
         Random rand = new Random();
         int x = (Math.abs((rand.nextInt() % a)));
@@ -68,53 +61,6 @@ public class MyPanel extends JPanel implements ActionListener {
             }
         }
     }
-
-
-//        // Tworzymy statki powietrzne
-//        for (int i = 0; i < planeCount; i++) {
-//            int x = RND(PANEL_WIDTH); // losowe x
-//            int y = RND(PANEL_HEIGHT); // losowe y
-//            int width = RND(100) + 20; // losowa szerokość między 50 a 120
-//            int height = RND(100) + 20; // losowa wysokość między 50 a 120
-////        int speed = RND(50)+10;
-////        Rectangle hitbox = new Rectangle(x, y, width, height);//tutaj moze byc blad
-//            Plane plane = new Plane(new Point(x, y));
-//
-//            // Dodajemy do listy statków powietrznych
-//            airships.add(plane);
-//        }
-//        // Powtarzamy powyższe kroki dla pozostałych typów statków powietrznych
-//        for (int i = 0; i < helicopterCount; i++) {
-//            int x = RND(PANEL_WIDTH);
-//            int y = RND(PANEL_HEIGHT);
-//            int width = RND(100) + 20;
-//            int height = RND(100) + 20;
-////        Rectangle hitbox = new Rectangle(x, y, width, height);
-////        int speed = RND(50) + 50;
-//            Helicopter helicopter = new Helicopter(new Point(x, y));
-//            airships.add(helicopter);
-//        }
-//        for (int i = 0; i < balloonCount; i++) {
-//            int x = RND(PANEL_WIDTH);
-//            int y = RND(PANEL_HEIGHT);
-//            int width = RND(100) + 20;
-//            int height = RND(100) + 20;
-////        Rectangle hitbox = new Rectangle(x, y, width, height);
-////        int speed = RND(50) + 50;
-//            Balloon balloon = new Balloon(new Point(x, y));
-//            airships.add(balloon);
-//        }
-//        for (int i = 0; i < gliderCount; i++) {
-//            int x = RND(PANEL_WIDTH);
-//            int y = RND(PANEL_HEIGHT);
-//            int width = RND(100) + 20;
-//            int height = RND(100) + 20;
-////        Rectangle hitbox = new Rectangle(x, y, width, height);
-////        int speed = RND(50) + 50;
-//            Glider glider = new Glider(new Point(x, y));
-//            airships.add(glider);
-//        }
-//    }
     public void paint(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2D = (Graphics2D) g;
@@ -123,10 +69,10 @@ public class MyPanel extends JPanel implements ActionListener {
         for (AirShip airShip : airships) {
             g2D.setPaint(airShip.getColor());
             g2D.drawRect(airShip.currentPos.x, airShip.currentPos.y, 100, 100);
-            for (Section section : airShip.sections) {
-                g2D.setPaint(airShip.getColor());
-                g2D.drawLine(section.x, section.y, section.endPoint.x, section.endPoint.y);
-            }
+                for (Section section : airShip.sections) {
+                    g2D.setPaint(airShip.getColor());
+                    g2D.drawLine(section.x, section.y, section.endPoint.x, section.endPoint.y);
+                }
         }
     }
 

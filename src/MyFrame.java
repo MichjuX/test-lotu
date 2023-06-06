@@ -15,6 +15,8 @@ public class MyFrame extends JFrame {
         JTextField balloonField = new JTextField(5);
         JTextField helicopterField = new JTextField(5);
         JTextField gliderField = new JTextField(5);
+        JToggleButton extendedOptions = new JToggleButton("Wlacz opcje zaawansowane");
+        dialog.add(extendedOptions);
         dialog.add(new JLabel("Samoloty: "));
         dialog.add(planeField);
         dialog.add(new JLabel("Helikoptery: "));
@@ -34,7 +36,6 @@ public class MyFrame extends JFrame {
                     airshipTypes.put(Helicopter.class, helicopterField.getText().isEmpty() ? 0 : Integer.parseInt(helicopterField.getText()));
                     airshipTypes.put(Balloon.class, balloonField.getText().isEmpty() ? 0 : Integer.parseInt(balloonField.getText()));
                     airshipTypes.put(Glider.class, gliderField.getText().isEmpty() ? 0 : Integer.parseInt(gliderField.getText()));
-
                     panel.createAirShip(airshipTypes);
                     dialog.dispose();
                 } catch (NumberFormatException ex) {

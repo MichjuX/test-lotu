@@ -9,12 +9,13 @@ import java.util.Random;
 public class AirShip extends JPanel implements ActionListener{
     Point startPos;
     Point currentPos;
-    List<Section> sections = new ArrayList<Section>();
+    List<Section> sections = new ArrayList<>();
     int endTime;
-    int altitude;
+    //int altitude;
     Rectangle hitbox;
     private Color color;
     Timer timer = new Timer(10,this);
+
 
     AirShip(Point startPos, List<Section> sections){
         this.startPos = startPos;
@@ -31,18 +32,14 @@ public class AirShip extends JPanel implements ActionListener{
                 new Point(RND(1280),RND(720)),
                 5
         ));
-//         kutas
-//        sections.add(new Section(sections.get(0).endTime, sections.get(0).endPoint, new Point(700,500), 2));
-//        sections.add(new Section(sections.get(1).endTime, sections.get(1).endPoint, new Point(700,100), 2));
-//        sections.add(new Section(sections.get(2).endTime, sections.get(2).endPoint, new Point(800,100), 2));
-//        sections.add(new Section(sections.get(3).endTime, sections.get(3).endPoint, new Point(800,500), 2));
-//        sections.add(new Section(sections.get(4).endTime, sections.get(4).endPoint, new Point(900,500), 2));
-//        sections.add(new Section(sections.get(5).endTime, sections.get(5).endPoint, new Point(900,600), 2));
-        for(int i=0; i<5; i++){
+        //bedziesz chcial to zmienisz sobie ale z RND nie dziala poprawnie
+        Random random = new Random();
+        for(int i=0; i<random.nextInt(5)+5; i++){
+            int velocity = random.nextInt(5)+3;
             sections.add(new Section(sections.get(i).endTime,
                     sections.get(i).endPoint,
                     new Point(RND(1280),RND(720)),
-                    5
+                    velocity
             ));
         }
 
@@ -92,7 +89,7 @@ public class AirShip extends JPanel implements ActionListener{
         g2D.drawLine(900, 500, 900, 600);
     }
     public void actionPerformed(ActionEvent event){
-        if(i<=sections.size()-1) {
+        if(i<sections.size()) {
 
             if (i-1 >= sections.size()) {
                 return;
