@@ -124,7 +124,7 @@ public class MyPanel extends JPanel implements ActionListener {
             g2D.setPaint(airShip.getColor());
             g2D.drawRect(airShip.currentPos.x, airShip.currentPos.y, 100, 100);
             for (Section section : airShip.sections) {
-                g2D.setPaint(new Color(25, 255, 255));
+                g2D.setPaint(airShip.getColor());
                 g2D.drawLine(section.x, section.y, section.endPoint.x, section.endPoint.y);
             }
         }
