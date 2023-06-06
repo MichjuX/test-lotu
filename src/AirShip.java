@@ -7,11 +7,13 @@ import java.util.List;
 import java.util.Random;
 
 public class AirShip extends JPanel implements ActionListener{
-    Point startPos = new Point();
-    Point currentPos = new Point();
+    Point startPos;
+    Point currentPos;
     List<Section> sections = new ArrayList<Section>();
     int endTime;
     int altitude;
+    Rectangle hitbox;
+    private Color color;
     Timer timer = new Timer(10,this);
 
     AirShip(Point startPos, List<Section> sections){
@@ -22,7 +24,8 @@ public class AirShip extends JPanel implements ActionListener{
         }
         this.currentPos = startPos;
     }
-    AirShip(Point startPos){
+    AirShip(Point startPos, Color color){
+        this.color = color;
         sections.add(new Section(0,
                 startPos,
                 new Point(RND(1280),RND(720)),
@@ -108,5 +111,9 @@ public class AirShip extends JPanel implements ActionListener{
             }
         }
         Line line = new Line();
+    }
+
+    public Paint getColor() {
+        return this.color;
     }
 }
