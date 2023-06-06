@@ -71,8 +71,8 @@ public class MyFrame extends JFrame {
         legenda.addActionListener((ActionEvent e) -> JOptionPane.showMessageDialog(frame, "Leganda:\n" +
                         "* Złote 10-cio katy - drzewa\n" +
                         "* Turkusowe protokaty - budynki\n" +
-                        "-------------------------------\n" +
-                        "", "Legenda",
+                        "--------------------------------------\n" +
+                        "Zolte - Helikoptery\n"+"Niebieskie - Balony \n"+ "Zielone - Samoloty\n" + "Biale - Szybowce\n", "Legenda",
                 JOptionPane.INFORMATION_MESSAGE));
         options.addActionListener((ActionEvent e) -> JOptionPane.showMessageDialog(frame, "Opcje:\n", "Opcje",
                 JOptionPane.INFORMATION_MESSAGE));
