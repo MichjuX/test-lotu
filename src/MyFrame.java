@@ -6,7 +6,10 @@ import java.util.HashMap;
 
 public class MyFrame extends JFrame {
     MyPanel panel;
+    HashMap<Class<? extends AirShip>, Integer> airshipTypes;
+
     MyFrame() throws Exception {
+        this.airshipTypes = new HashMap<>();
         JFrame frame = new JFrame("Radar");
         panel = new MyPanel();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -24,37 +27,37 @@ public class MyFrame extends JFrame {
         JTextField balloonField = new JTextField(5);
         JTextField helicopterField = new JTextField(5);
         JTextField gliderField = new JTextField(5);
-        JTextField advancedOptionField = new JTextField(5);//test linjka
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.gridx = 0;
         constraints.gridy = 0;
         dialog.add(new JLabel("Samoloty: "), constraints);
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        dialog.add(planeField, constraints);
+
         constraints.gridx = 1;
         constraints.gridy = 0;
-        dialog.add(planeField, constraints);
+        dialog.add(new JLabel("Helikoptery: "), constraints);
+        constraints.gridx = 1;
+        constraints.gridy = 1;
+        dialog.add(helicopterField, constraints);
 
         constraints.gridx = 2;
         constraints.gridy = 0;
-        dialog.add(new JLabel("Helikoptery: "), constraints);
-        constraints.gridx = 3;
-        constraints.gridy = 0;
-        dialog.add(helicopterField, constraints);
-
-        constraints.gridx = 4;
-        constraints.gridy = 0;
         dialog.add(new JLabel("Balony: "), constraints);
-        constraints.gridx = 5;
-        constraints.gridy = 0;
+        constraints.gridx = 2;
+        constraints.gridy = 1;
         dialog.add(balloonField, constraints);
 
-        constraints.gridx = 6;
+        constraints.gridx = 3;
         constraints.gridy = 0;
         dialog.add(new JLabel("Szybowce: "), constraints);
-        constraints.gridx = 7;
-        constraints.gridy = 0;
+        constraints.gridx = 3;
+        constraints.gridy = 1;
         dialog.add(gliderField, constraints);
-
         if (!isAdvanced) {
+
+
             JToggleButton extendedOptions = new JToggleButton("Zaawansowane");
             extendedOptions.addActionListener(new ActionListener() {
                 @Override
@@ -69,12 +72,75 @@ public class MyFrame extends JFrame {
             dialog.add(extendedOptions, constraints);
         }
         else{
+            JComboBox<String> planeSelector = new JComboBox<>();
+            JComboBox<String> helicopterSelector = new JComboBox<>();
+            JComboBox<String> balloonSelector = new JComboBox<>();
+            JComboBox<String> gliderSelector = new JComboBox<>();
+            for (Class<? extends AirShip> airshipType : airshipTypes.keySet()) {
+                String airshipTypeName = airshipType.getSimpleName();
+                planeSelector.addItem(airshipTypeName);
+                helicopterSelector.addItem(airshipTypeName);
+                balloonSelector.addItem(airshipTypeName);
+                gliderSelector.addItem(airshipTypeName);
+            }
             constraints.gridx = 0;
-            constraints.gridy = 1;
-            dialog.add(new JLabel("Zaawansowana opcja: "), constraints);
+            constraints.gridy = 2;
+            dialog.add(planeSelector, constraints);
             constraints.gridx = 1;
-            constraints.gridy = 1;
-            dialog.add(advancedOptionField, constraints);
+            constraints.gridy = 2;
+            dialog.add(helicopterSelector, constraints);
+            constraints.gridx = 2;
+            constraints.gridy = 2;
+            dialog.add(balloonSelector, constraints);
+            constraints.gridx = 3;
+            constraints.gridy = 2;
+            dialog.add(gliderSelector, constraints);
+            JButton updateButton = new JButton("Aktualizuj");
+            updateButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    planeSelector.removeAllItems();
+                    helicopterSelector.removeAllItems();
+                    balloonSelector.removeAllItems();
+                    gliderSelector.removeAllItems();
+                    try {
+                        airshipTypes.put(Plane.class, planeField.getText().isEmpty() ? 0 : Integer.parseInt(planeField.getText()));
+                        airshipTypes.put(Helicopter.class, helicopterField.getText().isEmpty() ? 0 : Integer.parseInt(helicopterField.getText()));
+                        airshipTypes.put(Balloon.class, balloonField.getText().isEmpty() ? 0 : Integer.parseInt(balloonField.getText()));
+                        airshipTypes.put(Glider.class, gliderField.getText().isEmpty() ? 0 : Integer.parseInt(gliderField.getText()));
+                        for (HashMap.Entry<Class<? extends AirShip>, Integer> entry : airshipTypes.entrySet()) {
+                            for (int i = 0; i < entry.getValue(); i++) {
+                                switch (entry.getKey().getSimpleName()) {
+                                    case "Plane":
+                                        planeSelector.addItem("Samolot " + (i + 1));
+                                        break;
+                                    case "Helicopter":
+                                        helicopterSelector.addItem("Helikopter " + (i + 1));
+                                        break;
+                                    case "Balloon":
+                                        balloonSelector.addItem("Balon " + (i + 1));
+                                        break;
+                                    case "Glider":
+                                        gliderSelector.addItem("Szybowiec " + (i + 1));
+                                        break;
+
+                                }
+
+                            }
+                        }
+                    }
+                    catch (NumberFormatException ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(frame, "Wprowadzono nieprawidłowe dane. Proszę wprowadzić tylko liczby całkowite.", "Błąd", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                }
+            });
+
+// umieść przycisk Aktualizuj w lewym dolnym rogu
+            constraints.gridx = 0;  // zmień na odpowiednie wartości, jeśli to konieczne
+            constraints.gridy = 6;  // zmień na odpowiednie wartości, jeśli to konieczne
+            dialog.add(updateButton, constraints);
         }
 
 
@@ -82,18 +148,16 @@ public class MyFrame extends JFrame {
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                HashMap<Class<? extends AirShip>, Integer> airshipTypes = new HashMap<>();
-
                 try {
-                    airshipTypes.put(Plane.class, planeField.getText().isEmpty() ? 0 : Integer.parseInt(planeField.getText()));
-                    airshipTypes.put(Helicopter.class, helicopterField.getText().isEmpty() ? 0 : Integer.parseInt(helicopterField.getText()));
-                    airshipTypes.put(Balloon.class, balloonField.getText().isEmpty() ? 0 : Integer.parseInt(balloonField.getText()));
-                    airshipTypes.put(Glider.class, gliderField.getText().isEmpty() ? 0 : Integer.parseInt(gliderField.getText()));
-                    panel.createAirShip(airshipTypes);
+                        airshipTypes.put(Plane.class, planeField.getText().isEmpty() ? 0 : Integer.parseInt(planeField.getText()));
+                        airshipTypes.put(Helicopter.class, helicopterField.getText().isEmpty() ? 0 : Integer.parseInt(helicopterField.getText()));
+                        airshipTypes.put(Balloon.class, balloonField.getText().isEmpty() ? 0 : Integer.parseInt(balloonField.getText()));
+                        airshipTypes.put(Glider.class, gliderField.getText().isEmpty() ? 0 : Integer.parseInt(gliderField.getText()));
+                        panel.createAirShip(airshipTypes);
+                        frame.pack();
+                        frame.setLocationRelativeTo(null);
+                        frame.setVisible(true);
                     dialog.dispose();
-                    frame.pack();
-                    frame.setLocationRelativeTo(null);
-                    frame.setVisible(true);
                 } catch (NumberFormatException ex) {
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(frame, "Wprowadzono nieprawidłowe dane. Proszę wprowadzić tylko liczby całkowite.", "Błąd", JOptionPane.ERROR_MESSAGE);
@@ -102,7 +166,7 @@ public class MyFrame extends JFrame {
             }
         });
         constraints.gridx = 3;
-        constraints.gridy = 2;
+        constraints.gridy = 5;
         constraints.gridwidth = 2;
         dialog.add(okButton, constraints);
         dialog.pack();
