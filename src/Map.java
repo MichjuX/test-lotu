@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Map extends JPanel {
     private List<StationaryObject> stationaryObjects = new ArrayList<>();
 
-    Map(String fileName, StationaryObject stationaryObject) throws Exception {
+    Map(String fileName) throws Exception {
         Scanner scanner = new Scanner(new File(fileName));
         scanner.useDelimiter(";");
         while (scanner.hasNext()) {
@@ -19,12 +19,12 @@ public class Map extends JPanel {
             int parametr = scanner.nextInt();
 
             if (kind.contains("t")) {
-                stationaryObject.addTree(new Tree(new Point(x, y), height, parametr));
-                stationaryObjects.add(stationaryObject);
+                Tree tree = new Tree(new Point(x, y), height, parametr);
+                stationaryObjects.add(tree);
             }
             else if (kind.contains("b")) {
-                stationaryObject.addBuilding(new Building(new Point(x, y), height, parametr));
-                stationaryObjects.add(stationaryObject);
+                Building building=new Building(new Point(x, y), height, parametr);
+                stationaryObjects.add(building);
             }
         }
     }
@@ -39,6 +39,4 @@ public class Map extends JPanel {
             stationaryObject.paintComponent(g2D);
         }
     }
-
-
 }

@@ -23,13 +23,6 @@ public class StationaryObject extends JPanel {
         this.height = height;
         this.parametr = parametr;
     }
-    public void addTree(Tree tree) {
-        trees.add(tree);
-    }
-
-    public void addBuilding(Building building) {
-        buildings.add(building);
-    }
 
     @Override
     public void paintComponent(Graphics g) {

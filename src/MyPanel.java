@@ -34,7 +34,7 @@ public class MyPanel extends JPanel implements ActionListener {
     double expectedTime = distance / Velocity;
     double currentTime = 0;
 
-    Map map = new Map("src\\mapa.txt", new StationaryObject());
+    Map map = new Map("src\\mapa.txt");
     CollisionDetector collisionDetector = new CollisionDetector(map.getObjects() , airships);
     MyPanel() throws Exception {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
