@@ -14,8 +14,9 @@ public class MyFrame extends JFrame {
         JFrame frame = new JFrame("Radar");
         panel = new MyPanel();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
+        frame.getContentPane().add(panel);
         frame.setJMenuBar(createMenu(frame));
+        frame.setBackground(Color.BLACK);
 
         showDialog(frame, "Wybierz co chcesz utworzyc, oraz ile: ", false);
     }
@@ -335,19 +336,32 @@ public class MyFrame extends JFrame {
         JMenuItem options = new JMenu("Opcje");
         JMenuItem menuItem1 = new JMenuItem("Modyfikacja statkow");
         JMenuItem menuItem2 = new JMenuItem("nicnaraziex");
+        JButton startStop = panel.createStartStop();
+        JButton clear = panel.clearButton();
         options.add(menuItem1);
         options.add(menuItem2);
-        legenda.addActionListener((ActionEvent e) -> JOptionPane.showMessageDialog(frame, "Leganda:\n" +
-                        "* Złote kwadraty - drzewa\n" +
-                        "* Turkusowe protokaty - budynki\n" +
-                        "--------------------------------------\n" +
-                        "Zolte - Helikoptery\n" + "Niebieskie - Balony \n" + "Zielone - Samoloty\n" + "Biale - Szybowce\n", "Legenda",
-                JOptionPane.INFORMATION_MESSAGE));
-        options.addActionListener((ActionEvent e) -> JOptionPane.showMessageDialog(frame, "Opcje:\n", "Opcje",
-                JOptionPane.INFORMATION_MESSAGE));
+        legenda.addActionListener((ActionEvent e) ->
+                JOptionPane.showMessageDialog(frame, "Leganda:\n" +
+                                "* Złote kwadraty - drzewa\n" +
+                                "* Turkusowe protokaty - budynki\n" +
+                                "--------------------------------------\n" +
+                                "Zolte - Helikoptery\n" + "Niebieskie - Balony \n" + "Zielone - Samoloty\n" + "Biale - Szybowce\n", "Legenda",
+                        JOptionPane.INFORMATION_MESSAGE)
+        );
+        options.addActionListener((ActionEvent e) ->
+                JOptionPane.showMessageDialog(frame, "Opcje:\n", "Opcje", JOptionPane.INFORMATION_MESSAGE)
+        );
+        menuItem1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MyFrame.this.showDialog(frame, "Wybierz co chcesz utworzyc, oraz ile: ", false);
+            }
+        });
         menuBar.setLayout((new FlowLayout(FlowLayout.LEFT)));
-        menuBar.add(options);
         menuBar.add(legenda);
+        menuBar.add(options);
+        menuBar.add(startStop);
+        menuBar.add(clear);
         return menuBar;
     }
 }

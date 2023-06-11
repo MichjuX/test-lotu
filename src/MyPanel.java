@@ -38,12 +38,32 @@ public class MyPanel extends JPanel implements ActionListener {
     CollisionDetector collisionDetector;
 
     MyPanel() throws Exception {
+        super();
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         this.setBackground(Color.black);
         timer = new Timer(delay, this);
         timer.start();
         this.airships = new ArrayList<>();
         this.collisionDetector = new CollisionDetector(map.getObjects(), airships);
+
+    }
+    public JButton createStartStop() {                          //przycisk kontrolujący
+        JButton startButton = new JButton("Stop");
+        startButton.addActionListener(event -> {
+            if (timer.isRunning()) {
+                timer.stop();
+                startButton.setText("Start");
+            } else {
+                timer.start();
+                startButton.setText("Stop");
+            }
+        });
+        return startButton;
+    }
+    public JButton clearButton() {                              //przycisk czyszczący planszę z statków powietrznych
+        JButton clearButton = new JButton("Clear");
+        clearButton.addActionListener( event -> airships.clear());
+        return clearButton;
     }
 
     private int RND(int a) {
@@ -91,6 +111,7 @@ public class MyPanel extends JPanel implements ActionListener {
         }
         collisionDetector.detectCollisions();
         repaint();
+
     }
 
 

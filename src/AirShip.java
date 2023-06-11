@@ -112,7 +112,7 @@ public class AirShip extends JPanel implements ActionListener{
         Line line = new Line();
     }
 
-    public Paint getColor() {
+    public Color getColor() {
         return this.color;
     }
 }
