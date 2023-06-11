@@ -5,6 +5,11 @@ public class Building extends StationaryObject {
     public Building(Point position, double height, int parametr) {
         super(position, height, parametr);
     }
+
+    public int getHeight() {
+        return parametr + 50;
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2D = (Graphics2D) g;

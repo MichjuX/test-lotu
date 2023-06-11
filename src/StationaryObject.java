@@ -15,6 +15,14 @@ public class StationaryObject extends JPanel {
         this.trees = new ArrayList<>();
         this.buildings = new ArrayList<>();
     }
+
+    public int getWidth() {
+        return parametr;
+    }
+    public int getHeight(){
+        return parametr;
+    }
+
     public void setColliding(boolean colliding) {
         this.colliding = colliding;
     }
