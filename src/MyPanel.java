@@ -102,6 +102,10 @@ public class MyPanel extends JPanel implements ActionListener {
         }
     }
 
+    public List<AirShip> getAirships() {
+        return airships;
+    }
+
     int counter = 0;
 
     @Override

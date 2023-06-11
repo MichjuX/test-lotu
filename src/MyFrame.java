@@ -78,7 +78,7 @@ public class MyFrame extends JFrame {
             JComboBox<String> helicopterSelector = new JComboBox<>();
             JComboBox<String> balloonSelector = new JComboBox<>();
             JComboBox<String> gliderSelector = new JComboBox<>();
-            for (Class<? extends AirShip> airshipType : airshipTypes.keySet()) {
+            for (Class<? extends AirShip> airshipType : airshipTypes.keySet()) {            //Tu jest zepsute bo bierze nazwy klas i wstawia do Comboboxa
                 String airshipTypeName = airshipType.getSimpleName();
                 planeSelector.addItem(airshipTypeName);
                 helicopterSelector.addItem(airshipTypeName);
@@ -354,7 +354,8 @@ public class MyFrame extends JFrame {
         menuItem1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MyFrame.this.showDialog(frame, "Wybierz co chcesz utworzyc, oraz ile: ", false);
+                showDialog(frame, "Aktualizacja statków", false);                   // w ten sposób przycisk "OK" zwraca
+                                                                                                   // ciągle to co napisało sie na początku
             }
         });
         menuBar.setLayout((new FlowLayout(FlowLayout.LEFT)));
