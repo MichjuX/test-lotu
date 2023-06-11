@@ -1,48 +1,38 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class StationaryObject extends JPanel {
-    private List<Tree> trees;
-    private List<Building> buildings;
     protected Point position;
-    protected double height;
+    protected int altitude;
     protected int parametr;
     private boolean colliding = false;
-
-    public StationaryObject() {
-        this.trees = new ArrayList<>();
-        this.buildings = new ArrayList<>();
-    }
 
     public int getWidth() {
         return parametr;
     }
-    public int getHeight(){
+
+    public int getHeight() {
         return parametr;
+    }
+
+    public int getAltitude() {
+        return altitude;
     }
 
     public void setColliding(boolean colliding) {
         this.colliding = colliding;
     }
+
     public boolean isColliding() {
         return this.colliding;
     }
-    public StationaryObject(Point position, double height, int parametr) {
+
+    public StationaryObject(Point position, int altitude, int parametr) {
         this.position = position;
-        this.height = height;
+        this.altitude = altitude;
         this.parametr = parametr;
     }
 
     @Override
-    public void paintComponent(Graphics g) {
-        for (Tree tree : trees) {
-            tree.paintComponent(g);
-        }
-        for (Building building : buildings) {
-            building.paintComponent(g);
-        }
-    }
-
+    public void paintComponent(Graphics g) { }
 }

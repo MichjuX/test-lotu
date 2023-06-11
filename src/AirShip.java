@@ -14,6 +14,7 @@ public class AirShip extends JPanel implements ActionListener{
     //int altitude;
     int height;
     int width;
+    int altitude;
     private Color color;
     private boolean colliding = false;
 
@@ -21,10 +22,11 @@ public class AirShip extends JPanel implements ActionListener{
     public boolean isColliding() {
         return this.colliding;
     }
-    AirShip(Point startPos, Color color, int height, int width){
+    AirShip(Point startPos, Color color, int height, int width, int altitude){
         this.color = color;
         this.height = height;
         this.width = width;
+        this.altitude=altitude;
         sections.add(new Section(0,
                 startPos,
                 new Point(RND(1280),RND(720)),
@@ -66,6 +68,11 @@ public class AirShip extends JPanel implements ActionListener{
     {
         return width;
     }
+
+    public int getAltitude() {
+        return altitude;
+    }
+
     private int RND(int a){
         Random rand = new Random();
         int x = (Math.abs((rand.nextInt()%a)-100));

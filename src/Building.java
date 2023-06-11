@@ -2,8 +2,8 @@ import java.awt.*;
 
 
 public class Building extends StationaryObject {
-    public Building(Point position, double height, int parametr) {
-        super(position, height, parametr);
+    public Building(Point position, int altitude, int parametr) {
+        super(position, altitude, parametr);
     }
 
     public int getHeight() {

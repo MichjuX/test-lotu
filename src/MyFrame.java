@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+import java.util.Random;
 
 public class MyFrame extends JFrame {
     MyPanel panel;
@@ -18,6 +19,7 @@ public class MyFrame extends JFrame {
 
         showDialog(frame, "Wybierz co chcesz utworzyc, oraz ile: ", false);
     }
+
     private void showDialog(JFrame frame, String title, boolean isAdvanced) {
         JDialog dialog = new JDialog(frame, title, true);
         dialog.setLayout(new GridBagLayout());
@@ -70,8 +72,7 @@ public class MyFrame extends JFrame {
             constraints.gridy = 3;
             constraints.gridwidth = 2;
             dialog.add(extendedOptions, constraints);
-        }
-        else{
+        } else {
             JComboBox<String> planeSelector = new JComboBox<>();
             JComboBox<String> helicopterSelector = new JComboBox<>();
             JComboBox<String> balloonSelector = new JComboBox<>();
@@ -107,7 +108,7 @@ public class MyFrame extends JFrame {
                 }
             });
 
-                // umieść przycisk dodaj w lewym gornym rogu
+            // umieść przycisk dodaj w lewym gornym rogu
             constraints.gridx = 0;  // zmień na odpowiednie wartości, jeśli to konieczne
             constraints.gridy = 0;  // zombie na odpowiednie wartości, jeśli to konieczne
             dialog.add(addPlane, constraints);
@@ -118,7 +119,7 @@ public class MyFrame extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                     // Get the current number of Planes in the airshipTypes HashMap
                     int currentPlaneCount = airshipTypes.getOrDefault(Plane.class, 0);
-                    if(currentPlaneCount > 0 && planeSelector.getItemCount() > 0) {
+                    if (currentPlaneCount > 0 && planeSelector.getItemCount() > 0) {
                         planeSelector.removeItemAt((planeSelector.getItemCount() - 1));
                         airshipTypes.put(Plane.class, currentPlaneCount - 1);
                     }
@@ -154,7 +155,7 @@ public class MyFrame extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                     // Get the current number of Planes in the airshipTypes HashMap
                     int currentHelicopterCount = airshipTypes.getOrDefault(Helicopter.class, 0);
-                    if(currentHelicopterCount > 0 && helicopterSelector.getItemCount() > 0) {
+                    if (currentHelicopterCount > 0 && helicopterSelector.getItemCount() > 0) {
                         helicopterSelector.removeItemAt((helicopterSelector.getItemCount() - 1));
                         airshipTypes.put(Helicopter.class, currentHelicopterCount - 1);
                     }
@@ -184,12 +185,12 @@ public class MyFrame extends JFrame {
             constraints.gridy = 0;  // zombie na odpowiednie wartości, jeśli to konieczne
             dialog.add(addBalloon, constraints);
 
-            JButton deleteBalloon= new JButton("Usun");
+            JButton deleteBalloon = new JButton("Usun");
             deleteBalloon.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     int currentBalloonCount = airshipTypes.getOrDefault(Balloon.class, 0);
-                    if(currentBalloonCount > 0 &&  balloonSelector.getItemCount() > 0) {
+                    if (currentBalloonCount > 0 && balloonSelector.getItemCount() > 0) {
                         balloonSelector.removeItemAt((balloonSelector.getItemCount() - 1));
                         airshipTypes.put(Balloon.class, currentBalloonCount - 1);
                     }
@@ -215,12 +216,12 @@ public class MyFrame extends JFrame {
             constraints.gridy = 0;
             dialog.add(addGlider, constraints);
 
-            JButton deleteGlider= new JButton("Usun");
+            JButton deleteGlider = new JButton("Usun");
             deleteGlider.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     int currentGliderCount = airshipTypes.getOrDefault(Glider.class, 0);
-                    if(currentGliderCount > 0 &&  gliderSelector.getItemCount() > 0) {
+                    if (currentGliderCount > 0 && gliderSelector.getItemCount() > 0) {
                         gliderSelector.removeItemAt((gliderSelector.getItemCount() - 1));
                         airshipTypes.put(Glider.class, currentGliderCount - 1);
                     }
@@ -255,8 +256,7 @@ public class MyFrame extends JFrame {
 
                             }
                         }
-                    }
-                    catch (NumberFormatException ex) {
+                    } catch (NumberFormatException ex) {
                         ex.printStackTrace();
                         JOptionPane.showMessageDialog(frame, "Wprowadzono nieprawidłowe dane. Proszę wprowadzić tylko liczby całkowite.", "Błąd", JOptionPane.ERROR_MESSAGE);
                     }
@@ -272,21 +272,22 @@ public class MyFrame extends JFrame {
 
 
         JButton okButton = new JButton("OK");
+        JButton drawButton = new JButton("Losuj");
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    if(airshipTypes.isEmpty()) {
+                    if (airshipTypes.isEmpty()) {
                         airshipTypes.put(Plane.class, planeField.getText().isEmpty() ? 0 : Integer.parseInt(planeField.getText()));
                         airshipTypes.put(Helicopter.class, helicopterField.getText().isEmpty() ? 0 : Integer.parseInt(helicopterField.getText()));
                         airshipTypes.put(Balloon.class, balloonField.getText().isEmpty() ? 0 : Integer.parseInt(balloonField.getText()));
                         airshipTypes.put(Glider.class, gliderField.getText().isEmpty() ? 0 : Integer.parseInt(gliderField.getText()));
                     }
-                        panel.createAirShip(airshipTypes);
-                        frame.pack();
-                        frame.setLocationRelativeTo(null);
-                        frame.setVisible(true);
-                        dialog.dispose();
+                    panel.createAirShip(airshipTypes);
+                    frame.pack();
+                    frame.setLocationRelativeTo(null);
+                    frame.setVisible(true);
+                    dialog.dispose();
                 } catch (NumberFormatException ex) {
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(frame, "Wprowadzono nieprawidłowe dane. Proszę wprowadzić tylko liczby całkowite.", "Błąd", JOptionPane.ERROR_MESSAGE);
@@ -294,10 +295,34 @@ public class MyFrame extends JFrame {
 
             }
         });
+        Random random = new Random();
+        drawButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    airshipTypes.put(Plane.class, random.nextInt(3));
+                    airshipTypes.put(Helicopter.class, random.nextInt(3));
+                    airshipTypes.put(Balloon.class, random.nextInt(3));
+                    airshipTypes.put(Glider.class, random.nextInt(3));
+                    panel.createAirShip(airshipTypes);
+                    frame.pack();
+                    frame.setLocationRelativeTo(null);
+                    frame.setVisible(true);
+                    dialog.dispose();
+                } catch (NumberFormatException ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(frame, "Wprowadzono nieprawidłowe dane. Proszę wprowadzić tylko liczby całkowite.", "Błąd", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
         constraints.gridx = 3;
         constraints.gridy = 6;
         constraints.gridwidth = 2;
         dialog.add(okButton, constraints);
+        constraints.gridx = 6;
+        constraints.gridy = 6;
+        constraints.gridwidth = 2;
+        dialog.add(drawButton, constraints);
         dialog.pack();
         dialog.setLocationRelativeTo(frame);
         dialog.setVisible(true);
@@ -316,7 +341,7 @@ public class MyFrame extends JFrame {
                         "* Złote kwadraty - drzewa\n" +
                         "* Turkusowe protokaty - budynki\n" +
                         "--------------------------------------\n" +
-                        "Zolte - Helikoptery\n"+"Niebieskie - Balony \n"+ "Zielone - Samoloty\n" + "Biale - Szybowce\n", "Legenda",
+                        "Zolte - Helikoptery\n" + "Niebieskie - Balony \n" + "Zielone - Samoloty\n" + "Biale - Szybowce\n", "Legenda",
                 JOptionPane.INFORMATION_MESSAGE));
         options.addActionListener((ActionEvent e) -> JOptionPane.showMessageDialog(frame, "Opcje:\n", "Opcje",
                 JOptionPane.INFORMATION_MESSAGE));

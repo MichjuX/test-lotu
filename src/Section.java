@@ -3,9 +3,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Section{
+public class Section {
     public final Point startPoint;
-    public int x,y;
+    public int x, y;
     public Point endPoint;
     public int velocity;
     public double distance;
@@ -13,17 +13,18 @@ public class Section{
     public double distanceY;
     public int startTime;
     public int endTime;
-    Section(int startTime, Point startPoint, Point endPoint, int velocity){
+
+    Section(int startTime, Point startPoint, Point endPoint, int velocity) {
         this.endPoint = endPoint;
         this.startPoint = startPoint;
         x = startPoint.x;
         y = startPoint.y;
         this.startTime = startTime;
         this.velocity = velocity;
-        distanceX = endPoint.x-startPoint.x;
-        distanceY = endPoint.y-startPoint.y;
-        distance = Math.sqrt(distanceX*distanceX+distanceY*distanceY);
-        endTime = (int) (startTime+distance/velocity);
+        distanceX = endPoint.x - startPoint.x;
+        distanceY = endPoint.y - startPoint.y;
+        distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+        endTime = (int) (startTime + distance / velocity);
 
     }
 

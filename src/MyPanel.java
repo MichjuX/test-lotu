@@ -34,15 +34,16 @@ public class MyPanel extends JPanel implements ActionListener {
     double expectedTime = distance / Velocity;
     double currentTime = 0;
 
-    Map map = new Map("src\\mapa.txt" );
+    Map map = new Map("src\\mapa.txt");
     CollisionDetector collisionDetector;
+
     MyPanel() throws Exception {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         this.setBackground(Color.black);
         timer = new Timer(delay, this);
         timer.start();
         this.airships = new ArrayList<>();
-        this.collisionDetector = new CollisionDetector(map.getObjects() , airships);
+        this.collisionDetector = new CollisionDetector(map.getObjects(), airships);
     }
 
     private int RND(int a) {
@@ -53,13 +54,14 @@ public class MyPanel extends JPanel implements ActionListener {
         } else System.out.println("y:" + x);
         return x;
     }
+
     public void createAirShip(HashMap<Class<? extends AirShip>, Integer> airshipTypes) {
         AirShipFactory factory = new AirShipFactory();
         for (HashMap.Entry<Class<? extends AirShip>, Integer> entry : airshipTypes.entrySet()) {
             for (int i = 0; i < entry.getValue(); i++) {
                 int x = RND(PANEL_WIDTH); // losowe x
                 int y = RND(PANEL_HEIGHT); // losowe y
-                airships.add(factory.createAirShip(entry.getKey(), new Point(x, y), RND(100)+50, RND(100)+50));
+                airships.add(factory.createAirShip(entry.getKey(), new Point(x, y), RND(100) + 50, RND(100) + 50, RND(1000) + 500));
             }
             collisionDetector = new CollisionDetector(map.getObjects(), airships);
         }
@@ -72,14 +74,16 @@ public class MyPanel extends JPanel implements ActionListener {
         map.paint(g);
         for (AirShip airShip : airships) {
             g2D.setPaint(airShip.isColliding() ? Color.RED : airShip.getColor());
-            g2D.drawRect((int) airShip.currentPos.getX(), (int) airShip.currentPos.getY() ,airShip.getAirshipWidth(), airShip.getAirShipHeight());
-                for (Section section : airShip.sections) {
-                    g2D.setPaint(airShip.getColor());
-                    g2D.drawLine(section.x, section.y, section.endPoint.x, section.endPoint.y);
-                }
+            g2D.drawRect((int) airShip.currentPos.getX(), (int) airShip.currentPos.getY(), airShip.getAirshipWidth(), airShip.getAirShipHeight());
+            for (Section section : airShip.sections) {
+                g2D.setPaint(airShip.getColor());
+                g2D.drawLine(section.x, section.y, section.endPoint.x, section.endPoint.y);
+            }
         }
     }
+
     int counter = 0;
+
     @Override
     public void actionPerformed(ActionEvent e) {
         for (AirShip airship : airships) {

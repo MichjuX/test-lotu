@@ -1,8 +1,7 @@
 import java.awt.*;
-import java.awt.geom.Path2D;
 
 public class Tree extends StationaryObject {
-    public Tree(Point position, double height, int parametr) {
+    public Tree(Point position, int height, int parametr) {
         super(position, height, parametr);
     }
 

@@ -1,7 +1,7 @@
 import java.awt.*;
 import javax.swing.*;
 
-public class Line extends JPanel{
+public class Line extends JPanel {
     public void paint(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2D = (Graphics2D) g;
