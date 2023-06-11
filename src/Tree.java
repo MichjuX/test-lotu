@@ -6,10 +6,6 @@ public class Tree extends StationaryObject {
         super(position, height, parametr);
     }
 
-    public double getHeihgt() {
-        return height;
-    }
-
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2D = (Graphics2D) g;

@@ -9,18 +9,20 @@ public class StationaryObject extends JPanel {
     protected Point position;
     protected double height;
     protected int parametr;
+    private boolean colliding = false;
 
     public StationaryObject() {
         this.trees = new ArrayList<>();
         this.buildings = new ArrayList<>();
     }
-
+    public void setColliding(boolean colliding) {
+        this.colliding = colliding;
+    }
     public StationaryObject(Point position, double height, int parametr) {
         this.position = position;
         this.height = height;
         this.parametr = parametr;
     }
-
     public void addTree(Tree tree) {
         trees.add(tree);
     }

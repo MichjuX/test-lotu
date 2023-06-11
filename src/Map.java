@@ -28,7 +28,9 @@ public class Map extends JPanel {
             }
         }
     }
-
+    public List<StationaryObject> getObjects(){
+        return stationaryObjects;
+    }
     @Override
     public void paint(Graphics g) {
         super.paintComponent(g);

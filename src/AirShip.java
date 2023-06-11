@@ -12,27 +12,21 @@ public class AirShip extends JPanel implements ActionListener{
     List<Section> sections = new ArrayList<>();
     int endTime;
     //int altitude;
-    Rectangle hitbox;
+    int height;
+    int width;
     private Color color;
+    private boolean colliding = false;
+
     Timer timer = new Timer(10,this);
-
-
-    AirShip(Point startPos, List<Section> sections){
-        this.startPos = startPos;
-        this.sections = sections;
-        for(Section section : sections){
-            this.endTime = section.endTime;
-        }
-        this.currentPos = startPos;
-    }
-    AirShip(Point startPos, Color color){
+    AirShip(Point startPos, Color color, int height, int width){
         this.color = color;
+        this.height = height;
+        this.width = width;
         sections.add(new Section(0,
                 startPos,
                 new Point(RND(1280),RND(720)),
                 5
         ));
-        //bedziesz chcial to zmienisz sobie ale z RND nie dziala poprawnie
         Random random = new Random();
         for(int i=0; i<random.nextInt(5)+5; i++){
             int velocity = random.nextInt(5)+3;
@@ -51,25 +45,23 @@ public class AirShip extends JPanel implements ActionListener{
 
         timer.start();
     }
-    public void updatePos(int currentTime) {
-//        if (sections.get(i).endTime <= currentTime) {
-//            i++;
-//        }
-//
-//        if (i >= sections.size()) {
-//            ended = true;
-//            return;
-//        }
-//        Section tempsection = sections.get(i);
-//        System.out.println("SEKCJA "+i+"\n");
-//        System.out.println(tempsection.toString());;
-//        double ratio = ((currentTime - tempsection.startTime) / (double) (tempsection.endTime - tempsection.startTime));
-//        currentPos.x = (int) (tempsection.x + ratio * tempsection.distanceX) -50;
-//        currentPos.y = (int) (tempsection.y + ratio * tempsection.distanceY) -50;
-////        currentPos.x = (int) (tempsection.startPoint.x + ratio * tempsection.distanceX);
-////        currentPos.y = (int) (tempsection.startPoint.y + ratio * tempsection.distanceY);
-//        System.out.println(currentPos.x + " " + currentPos.y);
-//    }
+    public void setColliding(boolean colliding) {
+        this.colliding = colliding;
+    }
+    public void setHeight(int height) {
+        this.height = height;
+    }
+    public void setWidth(int width)
+    {
+        this.width = width;
+    }
+    public int getAirShipHeight()
+    {
+        return height;
+    }
+    public int getAirshipWidth()
+    {
+        return width;
     }
     private int RND(int a){
         Random rand = new Random();
@@ -99,8 +91,8 @@ public class AirShip extends JPanel implements ActionListener{
     //        System.out.println("SEKCJA "+i+"\n");
     //        System.out.println(tempsection.toString());;
             double ratio = ((currentTime - tempsection.startTime) / (double) (tempsection.endTime - tempsection.startTime));
-            currentPos.x = (int) (tempsection.x + ratio * tempsection.distanceX) -50;
-            currentPos.y = (int) (tempsection.y + ratio * tempsection.distanceY) -50;
+            currentPos.x = (int) (tempsection.x + ratio * tempsection.distanceX) - this.width/2;
+            currentPos.y = (int) (tempsection.y + ratio * tempsection.distanceY) - this.height/2;
             System.out.println(currentPos.x + " " + currentPos.y);
             currentTime++;
             if (sections.get(i).endTime <= currentTime) {

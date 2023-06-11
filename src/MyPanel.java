@@ -35,6 +35,7 @@ public class MyPanel extends JPanel implements ActionListener {
     double currentTime = 0;
 
     Map map = new Map("src\\mapa.txt", new StationaryObject());
+    CollisionDetector collisionDetector = new CollisionDetector(map.getObjects() , airships);
     MyPanel() throws Exception {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         this.setBackground(Color.black);
@@ -57,7 +58,7 @@ public class MyPanel extends JPanel implements ActionListener {
             for (int i = 0; i < entry.getValue(); i++) {
                 int x = RND(PANEL_WIDTH); // losowe x
                 int y = RND(PANEL_HEIGHT); // losowe y
-                airships.add(factory.createAirShip(entry.getKey(), new Point(x, y)));
+                airships.add(factory.createAirShip(entry.getKey(), new Point(x, y), RND(100)+50, RND(100)+50));
             }
         }
     }
@@ -68,28 +69,22 @@ public class MyPanel extends JPanel implements ActionListener {
         map.paint(g);
         for (AirShip airShip : airships) {
             g2D.setPaint(airShip.getColor());
-            g2D.drawRect(airShip.currentPos.x, airShip.currentPos.y, 100, 100);
+            g2D.drawRect((int) airShip.currentPos.getX(), (int) airShip.currentPos.getY() ,airShip.getAirshipWidth(), airShip.getAirShipHeight());
                 for (Section section : airShip.sections) {
                     g2D.setPaint(airShip.getColor());
                     g2D.drawLine(section.x, section.y, section.endPoint.x, section.endPoint.y);
                 }
         }
     }
+    public void detectCollisions()
+    {
 
+    }
     int counter = 0;
-
     @Override
     public void actionPerformed(ActionEvent e) {
-//            airShip.updatePos(counter);
-//            counter++;
         repaint();
     }
-//    if(currentTime<=expectedTime) {
-//        x = (int) (startPos.x + (currentTime / expectedTime) * distanceX) - 50;
-//        y = (int) (startPos.y + (currentTime / expectedTime) * distanceY) - 50;
-//    }
-//    currentTime+=1;
-//        System.out.println("Current Position: (" + x + ", " + y + ")");
-//    repaint();
+
 
 }

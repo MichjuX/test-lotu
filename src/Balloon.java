@@ -2,8 +2,8 @@ import java.awt.*;
 import java.util.List;
 
 public class Balloon extends AirShip {
-    Balloon(Point startPos) {
-        super(startPos, Color.BLUE);
+    Balloon(Point startPos, int height, int width) {
+        super(startPos, Color.BLUE, height, width);
     }
 }
 
