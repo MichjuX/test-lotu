@@ -43,7 +43,22 @@ public class CollisionDetector {
 
         return correctDistance >= distance;*/
     }
+    public boolean isCollidingWithAirShip(AirShip airShip1, AirShip airShip2){
+        double airShip1Left = airShip1.currentPos.x - (double)airShip1.getAirshipWidth() / 2;
+        double airShip1Right = airShip1.currentPos.x + (double)airShip1.getAirshipWidth() / 2;
+        double airShip1Top = airShip1.currentPos.y - (double)airShip1.getAirShipHeight() / 2;
+        double airShip1Bottom = airShip1.currentPos.y + (double)airShip1.getAirShipHeight() / 2;
 
+        double airShip2Left = airShip2.currentPos.x - (double)airShip2.getAirshipWidth() / 2;
+        double airShip2Right = airShip2.currentPos.x + (double)airShip2.getAirshipWidth() / 2;
+        double airShip2Top = airShip2.currentPos.y - (double)airShip2.getAirShipHeight() / 2;
+        double airShip2Bottom = airShip2.currentPos.y + (double)airShip2.getAirShipHeight() / 2;
+
+        return (airShip1Right > airShip2Left
+                && airShip1Left < airShip2Right
+                && airShip1Bottom > airShip2Top
+                && airShip1Top < airShip2Bottom);
+    }
 
     public void detectCollisions() {
         for (AirShip airShip : airShips) {
@@ -54,7 +69,11 @@ public class CollisionDetector {
                 if(isColliding) break;
             }
             for (AirShip airShip1 : airShips){
-
+                if(airShip1!=airShip) {
+                    boolean isColliding = isCollidingWithAirShip(airShip, airShip1);
+                    if(!airShip.isColliding())airShip.setColliding(isColliding);
+                    if(!airShip1.isColliding())airShip1.setColliding(isColliding);
+                }
             }
         }
     }
