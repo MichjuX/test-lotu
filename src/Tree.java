@@ -25,6 +25,6 @@ public class Tree extends StationaryObject {
         }
         tree.closePath();
         g2D.setPaint(new Color(199, 154, 1));
-        g2D.draw(tree);
+        g2D.fill(tree);
     }
 }

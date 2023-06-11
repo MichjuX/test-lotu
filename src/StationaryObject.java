@@ -31,7 +31,6 @@ public class StationaryObject extends JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
-        Graphics2D g2D = (Graphics2D) g;
         for (Tree tree : trees) {
             tree.paintComponent(g);
         }
