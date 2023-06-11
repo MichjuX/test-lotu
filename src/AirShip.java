@@ -17,7 +17,10 @@ public class AirShip extends JPanel implements ActionListener{
     private Color color;
     private boolean colliding = false;
 
-    Timer timer = new Timer(10,this);
+   // Timer timer = new Timer(10,this);
+    public boolean isColliding() {
+        return this.colliding;
+    }
     AirShip(Point startPos, Color color, int height, int width){
         this.color = color;
         this.height = height;
@@ -43,7 +46,7 @@ public class AirShip extends JPanel implements ActionListener{
         }
         this.currentPos = startPos;
 
-        timer.start();
+        //timer.start();
     }
     public void setColliding(boolean colliding) {
         this.colliding = colliding;

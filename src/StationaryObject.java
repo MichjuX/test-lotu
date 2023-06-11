@@ -18,6 +18,9 @@ public class StationaryObject extends JPanel {
     public void setColliding(boolean colliding) {
         this.colliding = colliding;
     }
+    public boolean isColliding() {
+        return this.colliding;
+    }
     public StationaryObject(Point position, double height, int parametr) {
         this.position = position;
         this.height = height;

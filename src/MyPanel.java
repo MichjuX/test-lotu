@@ -34,14 +34,15 @@ public class MyPanel extends JPanel implements ActionListener {
     double expectedTime = distance / Velocity;
     double currentTime = 0;
 
-    Map map = new Map("src\\mapa.txt");
-    CollisionDetector collisionDetector = new CollisionDetector(map.getObjects() , airships);
+    Map map = new Map("src\\mapa.txt" );
+    CollisionDetector collisionDetector;
     MyPanel() throws Exception {
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         this.setBackground(Color.black);
         timer = new Timer(delay, this);
         timer.start();
         this.airships = new ArrayList<>();
+        this.collisionDetector = new CollisionDetector(map.getObjects() , airships);
     }
 
     private int RND(int a) {
@@ -60,15 +61,17 @@ public class MyPanel extends JPanel implements ActionListener {
                 int y = RND(PANEL_HEIGHT); // losowe y
                 airships.add(factory.createAirShip(entry.getKey(), new Point(x, y), RND(100)+50, RND(100)+50));
             }
+            collisionDetector = new CollisionDetector(map.getObjects(), airships);
         }
     }
+
     public void paint(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2D = (Graphics2D) g;
         g2D.setPaint(new Color(255, 255, 255));
         map.paint(g);
         for (AirShip airShip : airships) {
-            g2D.setPaint(airShip.getColor());
+            g2D.setPaint(airShip.isColliding() ? Color.RED : airShip.getColor());
             g2D.drawRect((int) airShip.currentPos.getX(), (int) airShip.currentPos.getY() ,airShip.getAirshipWidth(), airShip.getAirShipHeight());
                 for (Section section : airShip.sections) {
                     g2D.setPaint(airShip.getColor());
@@ -76,13 +79,13 @@ public class MyPanel extends JPanel implements ActionListener {
                 }
         }
     }
-    public void detectCollisions()
-    {
-
-    }
     int counter = 0;
     @Override
     public void actionPerformed(ActionEvent e) {
+        for (AirShip airship : airships) {
+            airship.actionPerformed(e);  // add this line
+        }
+        collisionDetector.detectCollisions();
         repaint();
     }
 

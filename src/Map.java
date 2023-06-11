@@ -23,7 +23,7 @@ public class Map extends JPanel {
                 stationaryObjects.add(tree);
             }
             else if (kind.contains("b")) {
-                Building building=new Building(new Point(x, y), height, parametr);
+                Building building = new Building(new Point(x, y), height, parametr);
                 stationaryObjects.add(building);
             }
         }
@@ -39,4 +39,6 @@ public class Map extends JPanel {
             stationaryObject.paintComponent(g2D);
         }
     }
+
+
 }
