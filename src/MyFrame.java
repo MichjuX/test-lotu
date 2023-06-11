@@ -313,7 +313,7 @@ public class MyFrame extends JFrame {
         options.add(menuItem1);
         options.add(menuItem2);
         legenda.addActionListener((ActionEvent e) -> JOptionPane.showMessageDialog(frame, "Leganda:\n" +
-                        "* Złote 10-cio katy - drzewa\n" +
+                        "* Złote kwadraty - drzewa\n" +
                         "* Turkusowe protokaty - budynki\n" +
                         "--------------------------------------\n" +
                         "Zolte - Helikoptery\n"+"Niebieskie - Balony \n"+ "Zielone - Samoloty\n" + "Biale - Szybowce\n", "Legenda",
