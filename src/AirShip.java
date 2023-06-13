@@ -106,6 +106,11 @@ public class AirShip extends JPanel implements ActionListener{
         }
     }
 
+    public boolean stillMoving(){
+        return this.endTime > this.currentTime;
+
+    }
+
     public Color getColor() {
         return this.color;
     }

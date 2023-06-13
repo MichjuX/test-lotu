@@ -96,6 +96,11 @@ public class MyPanel extends JPanel implements ActionListener {
                 g2D.drawLine(section.x, section.y, section.endPoint.x, section.endPoint.y);
             }
         }
+        for(int i=0; i<airships.size(); i++){
+            if(!airships.get(i).stillMoving())
+                airships.remove(i);
+        }
+
     }
 
     public List<AirShip> getAirships() {
@@ -108,8 +113,8 @@ public class MyPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        for (AirShip airship : airships) {
-            airship.actionPerformed(e);  // add this line
+        for (AirShip airShip : airships) {
+            airShip.actionPerformed(e);  // add this line
         }
         collisionDetector.detectCollisions();
         repaint();
