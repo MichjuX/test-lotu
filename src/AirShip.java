@@ -11,7 +11,6 @@ public class AirShip extends JPanel implements ActionListener{
     Point currentPos;
     List<Section> sections = new ArrayList<>();
     int endTime;
-    //int altitude;
     int height;
     int width;
     int altitude;
@@ -98,7 +97,6 @@ public class AirShip extends JPanel implements ActionListener{
             double ratio = ((currentTime - tempsection.startTime) / (double) (tempsection.endTime - tempsection.startTime));
             currentPos.x = (int) (tempsection.x + ratio * tempsection.distanceX) - this.width/2;
             currentPos.y = (int) (tempsection.y + ratio * tempsection.distanceY) - this.height/2;
-//            System.out.println(currentPos.x + " " + currentPos.y);
             currentTime++;
             if (sections.get(i).endTime <= currentTime) {
                 i++;
