@@ -37,6 +37,5 @@ public class Section {
     //             + "distanceY: " + distanceY + "\n"
     //             + "startTime:" + startTime + "\n"
     //             + "endTime:" + endTime + "\n";
-
     // }
 }

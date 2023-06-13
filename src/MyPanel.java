@@ -10,7 +10,6 @@ import java.util.Random;
 public class MyPanel extends JPanel implements ActionListener {
     public final int PANEL_WIDTH = 1280;
     public final int PANEL_HEIGHT = 720;
-    Image backgroundImage;
     Timer timer;
     int Velocity = 2;
     Point startPos = new Point(230, 550);
@@ -102,6 +101,8 @@ public class MyPanel extends JPanel implements ActionListener {
     public List<AirShip> getAirships() {
         return airships;
     }
+
+    // no usages trzeba usunąć
 
     int counter = 0;
 

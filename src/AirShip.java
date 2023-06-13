@@ -18,7 +18,6 @@ public class AirShip extends JPanel implements ActionListener{
     private Color color;
     private boolean colliding = false;
 
-   // Timer timer = new Timer(10,this);
     public boolean isColliding() {
         return this.colliding;
     }
@@ -48,7 +47,6 @@ public class AirShip extends JPanel implements ActionListener{
         }
         this.currentPos = startPos;
 
-        //timer.start();
     }
     public void setColliding(boolean colliding) {
         this.colliding = colliding;
@@ -97,9 +95,6 @@ public class AirShip extends JPanel implements ActionListener{
                 return;
             }
             Section tempsection = sections.get(i);
-
-    //        System.out.println("SEKCJA "+i+"\n");
-    //        System.out.println(tempsection.toString());;
             double ratio = ((currentTime - tempsection.startTime) / (double) (tempsection.endTime - tempsection.startTime));
             currentPos.x = (int) (tempsection.x + ratio * tempsection.distanceX) - this.width/2;
             currentPos.y = (int) (tempsection.y + ratio * tempsection.distanceY) - this.height/2;
@@ -109,7 +104,6 @@ public class AirShip extends JPanel implements ActionListener{
                 i++;
             }
         }
-        Line line = new Line();
     }
 
     public Color getColor() {

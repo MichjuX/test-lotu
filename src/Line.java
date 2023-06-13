@@ -8,4 +8,4 @@ public class Line extends JPanel {
         g2D.setPaint(new Color(255, 255, 255));
         g2D.drawLine(900, 500, 900, 600);
     }
-}//
+}
