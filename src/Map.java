@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Map extends JPanel {
     private final List<StationaryObject> stationaryObjects = new ArrayList<>();
 
-    Map(String fileName) throws Exception {
+    public Map(String fileName) throws Exception {
         Scanner scanner = new Scanner(new File(fileName));
         scanner.useDelimiter(";");
         while (scanner.hasNext()) {
@@ -28,7 +28,7 @@ public class Map extends JPanel {
         }
     }
 
-    public List<StationaryObject> getObjects() {
+    public List<StationaryObject> getStationaryObjects() {
         return stationaryObjects;
     }
 
@@ -37,7 +37,7 @@ public class Map extends JPanel {
         super.paintComponent(g);
         Graphics2D g2D = (Graphics2D) g;
         for (StationaryObject stationaryObject : stationaryObjects) {
-            stationaryObject.paintComponent(g2D);
+            stationaryObject.paint(g2D);
         }
     }
 }

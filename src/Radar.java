@@ -2,15 +2,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLOutput;
 import java.util.*;
 import java.util.List;
 
-public class MyFrame extends JFrame {
-    MyPanel panel;
+public class Radar extends JFrame {
+    private MyPanel panel;
     private boolean isRandomUsed = false;
-    HashMap<Class<? extends AirShip>, Integer> airshipTypes;
-    MyFrame() throws Exception {
+    private HashMap<Class<? extends AirShip>, Integer> airshipTypes;
+    public Radar() throws Exception {
         this.airshipTypes = new HashMap<>();
         JFrame frame = new JFrame("Radar");
         panel = new MyPanel();
@@ -20,10 +19,6 @@ public class MyFrame extends JFrame {
         frame.setBackground(Color.BLACK);
 
         showDialog(frame, "Wybierz co chcesz utworzyc, oraz ile: ", false);
-    }
-    private void showDialog1(JFrame frame1, String title, boolean isAdvanced) {
-        JDialog dialog = new JDialog(frame1, title, true);
-
     }
     private void showDialog(JFrame frame, String title, boolean isAdvanced) {
         JDialog dialog = new JDialog(frame, title, true);
@@ -413,7 +408,7 @@ public class MyFrame extends JFrame {
         JMenuItem menuItem1 = new JMenuItem("Modyfikacja statkow");
         JMenuItem menuItem2 = new JMenuItem("Modyfikacja trasy");
         JButton startStop = panel.createStartStop();
-        JButton clear = panel.clearButton();
+        JButton clear = panel.createClearButton();
         options.add(menuItem1);
         options.add(menuItem2);
         legenda.addActionListener((ActionEvent e) ->

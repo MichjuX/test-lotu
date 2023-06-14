@@ -1,23 +1,20 @@
 import java.awt.*;
 
 public class Section {
-    public final Point startPoint;
-    public int x, y;
-    public Point endPoint;
-    public int velocity;
-    public double distance;
-    public double distanceX;
-    public double distanceY;
-    public int startTime;
-    public int endTime;
+    private int x;
+    private int y;
+    private Point endPoint;
+    private double distance;
+    private double distanceX;
+    private double distanceY;
+    private int startTime;
+    private int endTime;
 
-    Section(int startTime, Point startPoint, Point endPoint, int velocity) {
+    public Section(int startTime, Point startPoint, Point endPoint, int velocity) {
         this.endPoint = endPoint;
-        this.startPoint = startPoint;
         x = startPoint.x;
         y = startPoint.y;
         this.startTime = startTime;
-        this.velocity = velocity;
         distanceX = endPoint.x - startPoint.x;
         distanceY = endPoint.y - startPoint.y;
         distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
@@ -25,17 +22,31 @@ public class Section {
 
     }
 
-//     @Override
-//     public String toString() {
-//         return "startPoint.x: " + startPoint.x + "\n"
-    //             + "startPoint.y: "+ startPoint.y + "\n"
-    //             + "endPoint.x: " + endPoint.x + "\n"
-    //             + "endPoint.y: " + endPoint.y + "\n"
-    //             + "velocity: " + velocity + "\n"
-    //             + "distance: " + distance + "\n"
-    //             + "distanceX: " + distanceX + "\n"
-    //             + "distanceY: " + distanceY + "\n"
-    //             + "startTime:" + startTime + "\n"
-    //             + "endTime:" + endTime + "\n";
-    // }
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public Point getEndPoint() {
+        return endPoint;
+    }
+
+    public double getDistanceX() {
+        return distanceX;
+    }
+
+    public double getDistanceY() {
+        return distanceY;
+    }
+
+    public int getStartTime() {
+        return startTime;
+    }
+
+    public int getEndTime() {
+        return endTime;
+    }
 }

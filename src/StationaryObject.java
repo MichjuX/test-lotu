@@ -4,35 +4,24 @@ import java.awt.*;
 abstract public class StationaryObject extends JPanel {
     protected Point position;
     protected int altitude;
-    protected int parametr;
-    private boolean colliding = false;
+    protected int size;
 
     public int getWidth() {
-        return parametr;
+        return size;
     }
 
     public int getHeight() {
-        return parametr;
+        return size;
     }
-
     public int getAltitude() {
         return altitude;
     }
 
-    public void setColliding(boolean colliding) {
-        this.colliding = colliding;
-    }
-
-    public boolean isColliding() {
-        return this.colliding;
-    }
-
-    public StationaryObject(Point position, int altitude, int parametr) {
+    public StationaryObject(Point position, int altitude, int size) {
         this.position = position;
         this.altitude = altitude;
-        this.parametr = parametr;
+        this.size = size;
     }
-
     @Override
-    public void paintComponent(Graphics g) { }
+    public void paint(Graphics g) { }
 }

@@ -8,39 +8,24 @@ import java.util.List;
 import java.util.Random;
 
 public class MyPanel extends JPanel implements ActionListener {
-    public final int PANEL_WIDTH = 1280;
-    public final int PANEL_HEIGHT = 720;
-    Timer timer;
-    int Velocity = 2;
-    Point startPos = new Point(230, 550);
-    Point endPos = new Point(300, 300);
-    Point endPost2 = new Point(1000, 200);
-    int x = startPos.x;
-    int y = startPos.y;
-    int y1 = 0, y2 = 50;
-    int delay = 10;
-    int refreshrate = 1000 / delay;
-    List<AirShip> airships;
+    private final int PANEL_WIDTH = 1280;
+    private final int PANEL_HEIGHT = 720;
+    private Timer timer;
+    private Point startPos = new Point(230, 550);
+    private Point endPos = new Point(300, 300);
+    private int delay = 10;
+    private List<AirShip> airships;
+    private Map map = new Map("src\\mapa.txt");
+    private CollisionDetector collisionDetector;
 
-
-    //
-    double distanceX = endPos.x - startPos.x;
-    double distanceY = endPos.y - startPos.y;
-    double distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-    double expectedTime = distance / Velocity;
-    double currentTime = 0;
-
-    Map map = new Map("src\\mapa.txt");
-    CollisionDetector collisionDetector;
-
-    MyPanel() throws Exception {
+    public MyPanel() throws Exception {
         super();
         this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         this.setBackground(Color.black);
         timer = new Timer(delay, this);
         timer.start();
         this.airships = new ArrayList<>();
-        this.collisionDetector = new CollisionDetector(map.getObjects(), airships);
+        this.collisionDetector = new CollisionDetector(map.getStationaryObjects(), airships);
 
     }
     public JButton createStartStop() {                          //przycisk kontrolujący
@@ -56,7 +41,7 @@ public class MyPanel extends JPanel implements ActionListener {
         });
         return startButton;
     }
-    public JButton clearButton() {                              //przycisk czyszczący planszę z statków powietrznych
+    public JButton createClearButton() {                              //przycisk czyszczący planszę z statków powietrznych
         JButton clearButton = new JButton("Clear");
         clearButton.addActionListener( event -> airships.clear());
         return clearButton;
@@ -79,7 +64,7 @@ public class MyPanel extends JPanel implements ActionListener {
                 int y = RND(PANEL_HEIGHT); // losowe y
                 airships.add(factory.createAirShip(entry.getKey(), new Point(x, y), RND(100) + 50, RND(100) + 50, RND(1000) + 500));
             }
-            collisionDetector = new CollisionDetector(map.getObjects(), airships);
+            collisionDetector = new CollisionDetector(map.getStationaryObjects(), airships);
         }
     }
 
@@ -93,7 +78,7 @@ public class MyPanel extends JPanel implements ActionListener {
             g2D.drawRect((int) airShip.currentPos.getX(), (int) airShip.currentPos.getY(), airShip.getAirshipWidth(), airShip.getAirShipHeight());
             for (Section section : airShip.sections) {
                 g2D.setPaint(airShip.getColor());
-                g2D.drawLine(section.x, section.y, section.endPoint.x, section.endPoint.y);
+                g2D.drawLine(section.getX(), section.getY(), (int) section.getEndPoint().getX(), (int) section.getEndPoint().getY());
             }
         }
         for(int i=0; i<airships.size(); i++){
@@ -108,8 +93,6 @@ public class MyPanel extends JPanel implements ActionListener {
     }
 
     // no usages trzeba usunąć
-
-    int counter = 0;
 
     @Override
     public void actionPerformed(ActionEvent e) {

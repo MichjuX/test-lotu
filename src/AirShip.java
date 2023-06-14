@@ -8,22 +8,22 @@ import java.util.Random;
 import java.util.Scanner;
 
 abstract public class AirShip extends JPanel implements ActionListener{
-    Point startPos;
-    Point currentPos;
-    List<Section> sections = new ArrayList<>();
-    int endTime;
-    int height;
-    int width;
-    int altitude;
-    int currentTime = 0;
+    private Point startPos;
+    public Point currentPos;
+    public List<Section> sections = new ArrayList<>();
+    private int endTime;
+    private int height;
+    private int width;
+    private int altitude;
+    private int currentTime = 0;
     private Color color;
     private boolean colliding = false;
-    int sectionNumber = 0;
+    private int sectionNumber = 0;
 
     public boolean isColliding() {
         return this.colliding;
     }
-    AirShip(Point startPos, Color color, int height, int width, int altitude){
+    public AirShip(Point startPos, Color color, int height, int width, int altitude){
         this.color = color;
         this.height = height;
         this.width = width;
@@ -36,8 +36,8 @@ abstract public class AirShip extends JPanel implements ActionListener{
         Random random = new Random();
         for(int i=0; i<random.nextInt(5)+5; i++){
             int velocity = random.nextInt(10)+5;
-            sections.add(new Section(sections.get(i).endTime,
-                    sections.get(i).endPoint,
+            sections.add(new Section(sections.get(i).getEndTime(),
+                    sections.get(i).getEndPoint(),
                     new Point(RND(1280),RND(720)),
                     velocity
             ));
@@ -45,7 +45,7 @@ abstract public class AirShip extends JPanel implements ActionListener{
 
         this.startPos = startPos;
         for(Section section : sections){
-            this.endTime = section.endTime;
+            this.endTime = section.getEndTime();
         }
         this.currentPos = startPos;
 
@@ -61,10 +61,10 @@ abstract public class AirShip extends JPanel implements ActionListener{
         sections.set(0, new Section(0, new Point(x,y), new Point(RND(1280),RND(720)), random.nextInt(5)+3));
         for(int i=1; i<sections.size(); i++){
             int velocity = random.nextInt(5)+3;
-                sections.set(i, new Section(sections.get(i-1).endTime, sections.get(i-1).endPoint, new Point(RND(1280),RND(720)), velocity));
+                sections.set(i, new Section(sections.get(i - 1).getEndTime(), sections.get(i - 1).getEndPoint(), new Point(RND(1280),RND(720)), velocity));
         }
         for(Section section : sections){
-            this.endTime = section.endTime;
+            this.endTime = section.getEndTime();
         }
     }
     public void changeRouteByHand(){
@@ -95,11 +95,11 @@ abstract public class AirShip extends JPanel implements ActionListener{
                 int y1 = scanner.nextInt();
                 System.out.println("Prędkość na odcinku " + i+1 + ":");
                 int velocity = scanner.nextInt();
-                sections.set(i, new Section(sections.get(i-1).endTime, sections.get(i-1).endPoint, new Point(x1, y1), velocity));
+                sections.set(i, new Section(sections.get(i - 1).getEndTime(), sections.get(i - 1).getEndPoint(), new Point(x1, y1), velocity));
             }
         }
         for(Section section : sections){
-            this.endTime = section.endTime;
+            this.endTime = section.getEndTime();
         }
     }
     public void setColliding(boolean colliding) {
@@ -140,7 +140,7 @@ abstract public class AirShip extends JPanel implements ActionListener{
         g2D.setPaint(new Color(255, 255, 255));
         g2D.drawLine(900, 500, 900, 600);
     }
-    boolean ended = false;
+    private boolean ended = false;
     public void actionPerformed(ActionEvent event){
         if(sectionNumber <sections.size()) {
 
@@ -149,11 +149,11 @@ abstract public class AirShip extends JPanel implements ActionListener{
                 return;
             }
             Section tempsection = sections.get(sectionNumber);
-            double ratio = ((currentTime - tempsection.startTime) / (double) (tempsection.endTime - tempsection.startTime));
-            currentPos.x = (int) (tempsection.x + ratio * tempsection.distanceX) - this.width/2;
-            currentPos.y = (int) (tempsection.y + ratio * tempsection.distanceY) - this.height/2;
+            double ratio = ((currentTime - tempsection.getStartTime()) / (double) (tempsection.getEndTime() - tempsection.getStartTime()));
+            currentPos.x = (int) (tempsection.getX() + ratio * tempsection.getDistanceX()) - this.width/2;
+            currentPos.y = (int) (tempsection.getY() + ratio * tempsection.getDistanceY()) - this.height/2;
             currentTime++;
-            if (sections.get(sectionNumber).endTime <= currentTime) {
+            if (sections.get(sectionNumber).getEndTime() <= currentTime) {
                 sectionNumber++;
             }
         }
