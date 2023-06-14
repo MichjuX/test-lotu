@@ -422,13 +422,7 @@ public class Radar extends JFrame {
         options.addActionListener((ActionEvent e) ->
                 JOptionPane.showMessageDialog(frame, "Opcje:\n", "Opcje", JOptionPane.INFORMATION_MESSAGE)
         );
-        menuItem1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                showDialog(frame, "Aktualizacja statków", false);                   // w ten sposób przycisk "OK" zwraca
-                                                                                                   // ciągle to co napisało sie na początku
-            }
-        });
+        menuItem1.addActionListener(e -> showDialog(frame, "Aktualizacja statków", false));
         menuBar.setLayout((new FlowLayout(FlowLayout.LEFT)));
         menuBar.add(legenda);
         menuBar.add(options);

@@ -20,7 +20,6 @@ public class CollisionDetector {
         double airShipTop = airShip.currentPos.getY() - (double) airShip.getAirShipHeight() / 2;
         double airShipBottom = airShip.currentPos.getY() + (double) airShip.getAirShipHeight() / 2;
 
-        // Check for a collision
         return (stationaryObjectRight > airShipLeft
                 && stationaryObjectLeft < airShipRight
                 && stationaryObjectBottom > airShipTop

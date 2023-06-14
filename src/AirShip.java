@@ -160,7 +160,6 @@ abstract public class AirShip extends JPanel implements ActionListener{
         else ended = true;
     }
     public boolean stillMoving(){
-//        return this.endTime >= this.currentTime;
         return ended;
     }
     public Color getColor() {
