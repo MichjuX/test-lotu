@@ -138,7 +138,7 @@ public class MyFrame extends JFrame {
             changeRoute.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    System.out.println("Jaki typ samolotu edytować?\n1. Samolot\n2. Helikopter\n3. Balon\n4. Szybowiec\n");
+                    System.out.println("Jaki typ samolotu edytować?\n1. Samolot\n2. Helikopter\n3. Balon\n4. Szybowiec");
                     Scanner scanner = new Scanner(System.in);
                     int type = scanner.nextInt();
                     System.out.println("Chcesz zmienić automatycznie czy ręcznie?\n1. Automatycznie\n2. Ręcznie");
