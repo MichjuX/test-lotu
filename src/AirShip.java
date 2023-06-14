@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-public class AirShip extends JPanel implements ActionListener{
+abstract public class AirShip extends JPanel implements ActionListener{
     Point startPos;
     Point currentPos;
     List<Section> sections = new ArrayList<>();

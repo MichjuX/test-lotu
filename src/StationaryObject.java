@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class StationaryObject extends JPanel {
+abstract public class StationaryObject extends JPanel {
     protected Point position;
     protected int altitude;
     protected int parametr;
