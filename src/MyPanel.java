@@ -97,7 +97,7 @@ public class MyPanel extends JPanel implements ActionListener {
             }
         }
         for(int i=0; i<airships.size(); i++){
-            if(!airships.get(i).stillMoving())
+            if(airships.get(i).stillMoving())
                 airships.remove(i);
         }
 

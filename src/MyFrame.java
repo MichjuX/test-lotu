@@ -2,8 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.Random;
+import java.sql.SQLOutput;
+import java.util.*;
+import java.util.List;
 
 public class MyFrame extends JFrame {
     MyPanel panel;
@@ -20,7 +21,10 @@ public class MyFrame extends JFrame {
 
         showDialog(frame, "Wybierz co chcesz utworzyc, oraz ile: ", false);
     }
+    private void showDialog1(JFrame frame1, String title, boolean isAdvanced) {
+        JDialog dialog = new JDialog(frame1, title, true);
 
+    }
     private void showDialog(JFrame frame, String title, boolean isAdvanced) {
         JDialog dialog = new JDialog(frame, title, true);
         dialog.setLayout(new GridBagLayout());
@@ -128,6 +132,95 @@ public class MyFrame extends JFrame {
             constraints.gridy = 1;
             dialog.add(deletePlane, constraints);
 
+            JButton changeRoute = new JButton("Zmień trase");
+            constraints.gridx = 1;
+            constraints.gridy = 6;
+            changeRoute.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println("Jaki typ samolotu edytować?\n1. Samolot\n2. Helikopter\n3. Balon\n4. Szybowiec\n");
+                    Scanner scanner = new Scanner(System.in);
+                    int type = scanner.nextInt();
+                    System.out.println("Chcesz zmienić automatycznie czy ręcznie?\n1. Automatycznie\n2. Ręcznie");
+                    int automanual = scanner.nextInt();
+                    List<AirShip> airships= panel.getAirships();
+                    List<Plane> planes = new ArrayList<>();
+                    List<Helicopter> helicopters = new ArrayList<>();
+                    List<Balloon> balloons = new ArrayList<>();
+                    List<Glider> gliders = new ArrayList<>();
+                    for(AirShip airShip : airships){
+                        if(airShip instanceof Plane){
+                            planes.add((Plane) airShip);
+                        }
+                        if(airShip instanceof Helicopter){
+                            helicopters.add((Helicopter) airShip);
+                        }
+                        if(airShip instanceof Balloon){
+                            balloons.add((Balloon) airShip);
+                        }
+                        if(airShip instanceof Glider){
+                            gliders.add((Glider) airShip);
+                        }
+                    }
+                    int id = 0;
+                    switch (type) {
+                        case 1 -> {
+                            System.out.println("Największe możliwe ID samolotu: " + (planes.size() - 1));
+                            System.out.println("Podaj id statku:");
+                            id = scanner.nextInt();
+                            if (id >= planes.size()) {
+                                System.out.println("Nie ma samolotu o takim ID!\n");
+                            } else {
+                                switch (automanual) {
+                                    case 1 -> planes.get(id).changeRouteToRandom();
+                                    case 2 -> planes.get(id).changeRouteByHand();
+                                }
+                            }
+                        }
+                        case 2 -> {
+                            System.out.println("Największe możliwe ID helikoptera: " + (helicopters.size() - 1));
+                            System.out.println("Podaj id statku:");
+                            id = scanner.nextInt();
+                            if (id >= helicopters.size()) {
+                                System.out.println("Nie ma helikoptera o takim ID!\n");
+                            } else {
+                                switch (automanual) {
+                                    case 1 -> helicopters.get(id).changeRouteToRandom();
+                                    case 2 -> helicopters.get(id).changeRouteByHand();
+                                }
+                            }
+                        }
+                        case 3 -> {
+                            System.out.println("Największe możliwe ID balonu: " + (balloons.size() - 1));
+                            System.out.println("Podaj id statku:");
+                            id = scanner.nextInt();
+                            if (id >= balloons.size()) {
+                                System.out.println("Nie ma balonu o takim ID!\n");
+                            } else {
+                                switch (automanual) {
+                                    case 1 -> balloons.get(id).changeRouteToRandom();
+                                    case 2 -> balloons.get(id).changeRouteByHand();
+                                }
+                            }
+                        }
+                        case 4 -> {
+                            System.out.println("Największe możliwe ID szybowca: " + (gliders.size() - 1));
+                            System.out.println("Podaj id statku:");
+                            id = scanner.nextInt();
+                            if (id >= gliders.size()) {
+                                System.out.println("Nie ma samolotu o takim ID!\n");
+                            } else {
+                                switch (automanual) {
+                                    case 1 -> gliders.get(id).changeRouteToRandom();
+                                    case 2 -> gliders.get(id).changeRouteByHand();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            dialog.add(changeRoute, constraints);
+
             JButton addHelicopter = new JButton("Dodaj");
             addHelicopter.addActionListener(new ActionListener() {
                 @Override
@@ -141,6 +234,7 @@ public class MyFrame extends JFrame {
             constraints.gridx = 1;
             constraints.gridy = 0;
             dialog.add(addHelicopter, constraints);
+
 
             JButton deleteHelicopter = new JButton("Usun");
             deleteHelicopter.addActionListener(new ActionListener() {
@@ -317,7 +411,7 @@ public class MyFrame extends JFrame {
         JMenuItem legenda = new JMenuItem("Legenda");
         JMenuItem options = new JMenu("Opcje");
         JMenuItem menuItem1 = new JMenuItem("Modyfikacja statkow");
-        JMenuItem menuItem2 = new JMenuItem("nicnaraziex");
+        JMenuItem menuItem2 = new JMenuItem("Modyfikacja trasy");
         JButton startStop = panel.createStartStop();
         JButton clear = panel.clearButton();
         options.add(menuItem1);
