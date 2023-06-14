@@ -160,56 +160,65 @@ public class Radar extends JFrame {
                     int id = 0;
                     switch (type) {
                         case 1 -> {
-                            System.out.println("Największe możliwe ID samolotu: " + (planes.size() - 1));
-                            System.out.println("Podaj id statku:");
-                            id = scanner.nextInt();
-                            if (id >= planes.size()) {
-                                System.out.println("Nie ma samolotu o takim ID!\n");
-                            } else {
-                                switch (automanual) {
-                                    case 1 -> planes.get(id).changeRouteToRandom();
-                                    case 2 -> planes.get(id).changeRouteByHand();
+                            if (!planes.isEmpty()) {
+                                System.out.println("Największe możliwe ID samolotu: " + (planes.size() - 1));
+                                System.out.println("Podaj id statku:");
+                                id = scanner.nextInt();
+                                if (id >= planes.size()) {
+                                    System.out.println("Nie ma samolotu o takim ID!\n");
+                                } else {
+                                    switch (automanual) {
+                                        case 1 -> planes.get(id).changeRouteToRandom();
+                                        case 2 -> planes.get(id).changeRouteByHand();
+                                    }
                                 }
                             }
+                            else { System.out.println("Brak samolotów");}
                         }
                         case 2 -> {
-                            System.out.println("Największe możliwe ID helikoptera: " + (helicopters.size() - 1));
-                            System.out.println("Podaj id statku:");
-                            id = scanner.nextInt();
-                            if (id >= helicopters.size()) {
-                                System.out.println("Nie ma helikoptera o takim ID!\n");
-                            } else {
-                                switch (automanual) {
-                                    case 1 -> helicopters.get(id).changeRouteToRandom();
-                                    case 2 -> helicopters.get(id).changeRouteByHand();
+                            if (!helicopters.isEmpty()) {
+                                System.out.println("Największe możliwe ID helikoptera: " + (helicopters.size() - 1));
+                                System.out.println("Podaj id statku:");
+                                id = scanner.nextInt();
+                                if (id >= helicopters.size()) {
+                                    System.out.println("Nie ma helikoptera o takim ID!\n");
+                                } else {
+                                    switch (automanual) {
+                                        case 1 -> helicopters.get(id).changeRouteToRandom();
+                                        case 2 -> helicopters.get(id).changeRouteByHand();
+                                    }
                                 }
-                            }
+                            } else { System.out.println("Brak helikopterów");}
                         }
                         case 3 -> {
-                            System.out.println("Największe możliwe ID balonu: " + (balloons.size() - 1));
-                            System.out.println("Podaj id statku:");
-                            id = scanner.nextInt();
-                            if (id >= balloons.size()) {
-                                System.out.println("Nie ma balonu o takim ID!\n");
-                            } else {
-                                switch (automanual) {
-                                    case 1 -> balloons.get(id).changeRouteToRandom();
-                                    case 2 -> balloons.get(id).changeRouteByHand();
+                            if (!balloons.isEmpty()) {
+                                System.out.println("Największe możliwe ID balonu: " + (balloons.size() - 1));
+                                System.out.println("Podaj id statku:");
+                                id = scanner.nextInt();
+                                if (id >= balloons.size()) {
+                                    System.out.println("Nie ma balonu o takim ID!\n");
+                                } else {
+                                    switch (automanual) {
+                                        case 1 -> balloons.get(id).changeRouteToRandom();
+                                        case 2 -> balloons.get(id).changeRouteByHand();
+                                    }
                                 }
-                            }
+                            } else { System.out.println("Brak balonow");}
                         }
                         case 4 -> {
-                            System.out.println("Największe możliwe ID szybowca: " + (gliders.size() - 1));
-                            System.out.println("Podaj id statku:");
-                            id = scanner.nextInt();
-                            if (id >= gliders.size()) {
-                                System.out.println("Nie ma samolotu o takim ID!\n");
-                            } else {
-                                switch (automanual) {
-                                    case 1 -> gliders.get(id).changeRouteToRandom();
-                                    case 2 -> gliders.get(id).changeRouteByHand();
+                            if (!gliders.isEmpty()) {
+                                System.out.println("Największe możliwe ID szybowca: " + (gliders.size() - 1));
+                                System.out.println("Podaj id statku:");
+                                id = scanner.nextInt();
+                                if (id >= gliders.size()) {
+                                    System.out.println("Nie ma samolotu o takim ID!\n");
+                                } else {
+                                    switch (automanual) {
+                                        case 1 -> gliders.get(id).changeRouteToRandom();
+                                        case 2 -> gliders.get(id).changeRouteByHand();
+                                    }
                                 }
-                            }
+                            }else { System.out.println("Brak szybowcow");}
                         }
                     }
                 }
@@ -406,11 +415,9 @@ public class Radar extends JFrame {
         JMenuItem legenda = new JMenuItem("Legenda");
         JMenuItem options = new JMenu("Opcje");
         JMenuItem menuItem1 = new JMenuItem("Modyfikacja statkow");
-        JMenuItem menuItem2 = new JMenuItem("Modyfikacja trasy");
         JButton startStop = panel.createStartStop();
         JButton clear = panel.createClearButton();
         options.add(menuItem1);
-        options.add(menuItem2);
         legenda.addActionListener((ActionEvent e) ->
                 JOptionPane.showMessageDialog(frame, "Leganda:\n" +
                                 "* Złote kwadraty - drzewa\n" +
