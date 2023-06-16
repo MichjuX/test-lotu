@@ -89,11 +89,11 @@ abstract public class AirShip extends JPanel implements ActionListener{
                 sections.set(0, new Section(0, new Point(x1, y1), new Point(x2, y2), velocity));
             }
             else{
-                System.out.println("Współrzędna x końcowa odcinka numer " + i+1 + ":");
+                System.out.println("Współrzędna x końcowa odcinka numer " + (i+1) + ":");
                 int x1 = scanner.nextInt();
-                System.out.println("Współrzędna y końcowa odcinka numer " + i+1 + ":");
+                System.out.println("Współrzędna y końcowa odcinka numer " + (i+1) + ":");
                 int y1 = scanner.nextInt();
-                System.out.println("Prędkość na odcinku " + i+1 + ":");
+                System.out.println("Prędkość na odcinku " + (i+1) + ":");
                 int velocity = scanner.nextInt();
                 sections.set(i, new Section(sections.get(i - 1).getEndTime(), sections.get(i - 1).getEndPoint(), new Point(x1, y1), velocity));
             }

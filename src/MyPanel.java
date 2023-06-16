@@ -97,7 +97,7 @@ public class MyPanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         for (AirShip airShip : airships) {
-            airShip.actionPerformed(e);  // add this line
+            airShip.actionPerformed(e);
         }
         collisionDetector.detectCollisions();
         repaint();
